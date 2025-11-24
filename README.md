@@ -26,3 +26,51 @@ very simple project with the goal to dive deeper into code Testing
 * git clone 
 * `cd vitamin-knowladge-hub`
 *  ```./mvnw spring-boot:run -Dspring-boot.run.profiles=dev```
+
+
+### Getting started with tests
+* `mvn test`
+* `mvn integration-test` or `mvn verify` to run integration testing
+
+
+### Api testing json
+
+ POST `http://localhost:8080/api/food`
+```json
+{
+  "name": "Banana",
+  "imageUrl": "https://example.com/banana.png",
+  "overview": " packed with nutrients like potassium, vitamin C, fiber, and vitamin B6, which support heart health, digestion, and nerve function. They can provide a quick energy boost,",
+  "benefits": ["High in potassium"],
+  "macronutrients": {
+    "calories": 80,
+    "proteinGrams": 1.1,
+    "fatGrams": 0.3,
+    "carbohydratesGrams": 23,
+    "fiberGrams": 2.6,
+    "sugarGrams": 12
+  },
+  "macrominerals": [
+    {
+      "macromineral": "POTASSIUM",
+      "amountMilligrams": 358,
+      "dailyValuePercent": 10
+    }
+  ],
+  "microminerals": [
+    {
+      "micromineral": "MANGANESE",
+      "amountMilligrams": 0.27,
+      "dailyValuePercent": 13
+    }
+  ],
+  "vitamins": [
+    {
+      "vitamin": "B6_PYRIDOXINE",
+      "amountMilligrams": 0.4,
+      "dailyValuePercent": 20
+    }
+  ]
+}
+
+```

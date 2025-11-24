@@ -1,4 +1,4 @@
-package com.example.vitaminknowledgehub;
+package com.example.foodknowledgehub;
 
 import org.junit.jupiter.api.Test;
 import org.testcontainers.containers.PostgreSQLContainer;

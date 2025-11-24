@@ -1,9 +1,6 @@
 package com.example.foodknowledgehub;
 
 import org.junit.jupiter.api.Test;
-import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,19 +9,14 @@ import java.sql.Statement;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@Testcontainers
-class PostgresContainerTest {
-
-    @Container
-    static PostgreSQLContainer<?> postgres =
-            new PostgreSQLContainer<>("postgres:17.1");
+class PostgresContainerJdbcTest extends AbstractPostgresContainerTest {
 
     @Test
     void testDatabaseIsRunning() throws Exception {
         Connection connection = DriverManager.getConnection(
-                postgres.getJdbcUrl(),
-                postgres.getUsername(),
-                postgres.getPassword()
+                POSTGRES.getJdbcUrl(),
+                POSTGRES.getUsername(),
+                POSTGRES.getPassword()
         );
 
         Statement statement = connection.createStatement();
@@ -41,4 +33,5 @@ class PostgresContainerTest {
 
         connection.close();
     }
+
 }

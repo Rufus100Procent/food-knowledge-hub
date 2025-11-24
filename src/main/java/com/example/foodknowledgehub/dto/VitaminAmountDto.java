@@ -1,21 +1,21 @@
-package com.example.foodknowledgehub.modal;
+package com.example.foodknowledgehub.dto;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import com.example.foodknowledgehub.modal.Vitamin;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotNull;
 
-@Embeddable
-public class VitaminAmount {
+public class VitaminAmountDto {
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "vitamin")
+    @NotNull(message = "Vitamin type is required.")
     private Vitamin vitamin;
 
-    @Column(name = "amount_mg")
+    @DecimalMin(value = "0.0", message = "Vitamin amount cannot be negative.")
+    @DecimalMax(value = "100000.0", message = "Vitamin amount is unrealistically high.")
     private double amountMilligrams;
 
-    @Column(name = "daily_value_percent")
+    @DecimalMin(value = "0.0", message = "Daily value percent cannot be negative.")
+    @DecimalMax(value = "1000.0", message = "Daily value percent cannot exceed 1000%.")
     private double dailyValuePercent;
 
     //<editor-fold desc="Getters and Setters">
@@ -43,5 +43,6 @@ public class VitaminAmount {
     public void setDailyValuePercent(double dailyValuePercent) {
         this.dailyValuePercent = dailyValuePercent;
     }
+
     //</editor-fold>
 }

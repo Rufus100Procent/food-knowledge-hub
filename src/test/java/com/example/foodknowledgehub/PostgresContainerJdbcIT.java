@@ -9,7 +9,7 @@ import java.sql.Statement;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class PostgresContainerJdbcTest extends AbstractPostgresContainerTest {
+class PostgresContainerJdbcIT extends AbstractPostgresContainer {
 
     @Test
     void testDatabaseIsRunning() throws Exception {

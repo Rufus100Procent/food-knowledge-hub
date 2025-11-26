@@ -35,7 +35,7 @@ very simple project with the goal to dive deeper into code Testing
 
 ### Api testing json
 
- POST `http://localhost:8080/api/food`
+ POST `http://localhost:8080/api/v0/food`
 ```json
 {
   "name": "Banana",

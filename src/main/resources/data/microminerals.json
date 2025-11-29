@@ -1,0 +1,208 @@
+[
+  {
+    "micromineral": "IRON",
+    "overview": "Iron is an essential trace mineral required for oxygen transport, energy production, DNA synthesis and numerous metabolic processes. Most iron in the body is found in hemoglobin in red blood cells, where it binds oxygen for delivery to tissues. It is also present in myoglobin in muscle and in iron-dependent enzymes involved in oxidative metabolism and immune function.",
+    "benefits": [
+      "Supports formation of hemoglobin, enabling oxygen transport throughout the body",
+      "Essential for myoglobin in muscle cells, supporting oxygen storage and muscle performance",
+      "Required for energy production through involvement in mitochondrial electron transport",
+      "Contributes to normal cognitive development and function",
+      "Important for immune system activity and resistance to infection",
+      "Supports normal growth and development, especially during infancy, childhood and pregnancy"
+    ],
+    "sideEffects": [
+      "Excessive iron intake from supplements can cause gastrointestinal distress such as nausea, constipation and abdominal pain",
+      "Very high intakes can lead to acute toxicity, especially in children, with symptoms including vomiting, diarrhea and organ damage",
+      "Chronic high iron stores (e.g., in hereditary hemochromatosis or repeated high-dose supplementation) can cause liver damage, heart problems and endocrine dysfunction",
+      "Iron supplements can interact with certain medications, including some antibiotics and thyroid medications"
+    ],
+    "deficiencySigns": [
+      "Iron-deficiency anemia, characterized by fatigue, weakness, pale skin, shortness of breath and reduced exercise tolerance",
+      "Impaired cognitive function, difficulty concentrating and irritability",
+      "Cold intolerance and reduced immune function",
+      "In infants and children, impaired growth and developmental delays",
+      "Brittle nails, hair loss and cravings for non-food substances (pica) in severe cases"
+    ]
+  },
+  {
+    "micromineral": "ZINC",
+    "overview": "Zinc is an essential trace element involved in hundreds of enzymatic reactions, protein synthesis, DNA stabilization, immune function and wound healing. It plays structural, catalytic and regulatory roles in numerous biological processes and is required for normal growth and development.",
+    "benefits": [
+      "Supports normal immune function and helps maintain resistance to infections",
+      "Required for DNA and protein synthesis and cell division",
+      "Contributes to normal wound healing through involvement in tissue repair and collagen synthesis",
+      "Essential for normal growth and development during pregnancy, infancy and childhood",
+      "Supports normal sense of taste and smell",
+      "Acts as a cofactor for antioxidant enzymes, helping protect cells from oxidative damage"
+    ],
+    "sideEffects": [
+      "High supplemental zinc intake may cause nausea, vomiting, abdominal cramps and diarrhea",
+      "Chronic excessive intake can interfere with copper absorption, potentially causing copper deficiency and anemia",
+      "High doses may impair immune function paradoxically",
+      "Zinc can reduce absorption of certain medications, including some antibiotics"
+    ],
+    "deficiencySigns": [
+      "Impaired immune function and increased susceptibility to infections",
+      "Slow wound healing and dermatitis, especially around body openings",
+      "Loss of appetite, taste disturbances and smell impairment",
+      "Hair loss, diarrhea and weight loss in more severe deficiency",
+      "In children, impaired growth and developmental delays",
+      "In men, decreased testosterone and reproductive issues in severe deficiency"
+    ]
+  },
+  {
+    "micromineral": "COPPER",
+    "overview": "Copper is an essential trace mineral that plays a role in iron metabolism, antioxidant defense, connective tissue formation and energy production. It acts as a cofactor for many enzymes involved in redox reactions, neurotransmitter synthesis and maintenance of the nervous and cardiovascular systems.",
+    "benefits": [
+      "Required for iron transport and utilization, supporting formation of red blood cells",
+      "Plays a role in antioxidant defense through the enzyme superoxide dismutase",
+      "Contributes to formation of connective tissue, including collagen and elastin",
+      "Supports normal immune function and nervous system development",
+      "Helps maintain normal pigment of skin and hair through involvement in melanin production",
+      "Required for normal energy metabolism via copper-dependent enzymes"
+    ],
+    "sideEffects": [
+      "Excessive copper intake from supplements can cause nausea, abdominal pain and vomiting",
+      "Chronic high intake may lead to liver damage, oxidative stress and neurological symptoms",
+      "People with Wilson’s disease cannot properly eliminate copper and must avoid excess intake",
+      "High copper intake can interact with zinc absorption, leading to imbalances"
+    ],
+    "deficiencySigns": [
+      "Anemia that does not respond to iron supplementation due to impaired iron mobilization",
+      "Neutropenia (low white blood cell count), increasing infection risk",
+      "Neurological symptoms such as numbness, difficulty walking and sensory disturbances",
+      "Bone abnormalities, including osteoporosis and impaired growth in children",
+      "Fatigue, hair depigmentation and weakened immune response"
+    ]
+  },
+  {
+    "micromineral": "MANGANESE",
+    "overview": "Manganese is a trace mineral involved in bone development, metabolism of carbohydrates and amino acids and antioxidant defense. It acts as a cofactor for enzymes such as manganese superoxide dismutase, which protects mitochondria from oxidative damage.",
+    "benefits": [
+      "Supports normal formation and maintenance of bone and cartilage",
+      "Acts as a cofactor for enzymes involved in carbohydrate, amino acid and cholesterol metabolism",
+      "Important for antioxidant protection via manganese-dependent superoxide dismutase",
+      "Contributes to normal wound healing and collagen formation",
+      "Supports normal brain and nervous system function"
+    ],
+    "sideEffects": [
+      "Excess manganese intake from food is rare; toxicity is more common from contaminated water or occupational exposure",
+      "High chronic exposure can lead to neurological symptoms resembling Parkinson’s disease (manganism)",
+      "Very large supplemental doses may cause cognitive or motor disturbances"
+    ],
+    "deficiencySigns": [
+      "Bone demineralization and skeletal abnormalities",
+      "Skin rashes, impaired wound healing and poor growth",
+      "Altered carbohydrate and lipid metabolism",
+      "Reproductive issues in severe deficiency (primarily observed in research contexts)",
+      "Reduced antioxidant capacity in cells"
+    ]
+  },
+  {
+    "micromineral": "SELENIUM",
+    "overview": "Selenium is an essential trace mineral incorporated into selenoproteins, which play key roles in antioxidant defense, thyroid hormone metabolism and immune function. It protects cells from oxidative stress and supports normal fertility and cardiovascular health.",
+    "benefits": [
+      "Integral to antioxidant enzymes such as glutathione peroxidases, protecting cells from oxidative damage",
+      "Supports normal thyroid hormone production and metabolism",
+      "Contributes to immune system function and antiviral defense",
+      "May play a role in male fertility through effects on sperm development and motility",
+      "Helps maintain DNA integrity and reduces oxidative stress"
+    ],
+    "sideEffects": [
+      "High selenium intake from supplements can cause selenosis, with symptoms such as hair loss, nail brittleness and garlic-like breath odor",
+      "Excessive intake can lead to gastrointestinal upset, skin rash, irritability and neurological abnormalities",
+      "Very high doses may increase risk of type 2 diabetes according to some studies, though evidence is mixed"
+    ],
+    "deficiencySigns": [
+      "Muscle weakness, fatigue and general malaise",
+      "Impaired immune function and increased vulnerability to infections",
+      "Keshan disease, a form of cardiomyopathy influenced by very low selenium status (rare and region-specific)",
+      "Thyroid dysfunction resulting from impaired thyroid hormone metabolism",
+      "Reduced antioxidant protection, leading to increased oxidative stress in tissues"
+    ]
+  },
+  {
+    "micromineral": "IODINE",
+    "overview": "Iodine is an essential trace mineral required for the synthesis of thyroid hormones, which regulate metabolism, growth and development. Adequate iodine intake is especially critical during pregnancy and early childhood for proper brain development.",
+    "benefits": [
+      "Required for production of thyroid hormones T3 and T4, which regulate metabolic processes throughout the body",
+      "Supports normal growth and development in infants and children",
+      "Critical for brain development during fetal and early postnatal life",
+      "Contributes to normal energy metabolism",
+      "Helps maintain healthy skin through thyroid hormone regulation"
+    ],
+    "sideEffects": [
+      "Excessive iodine intake can disrupt thyroid function, potentially causing hyperthyroidism or hypothyroidism",
+      "High intakes may trigger thyroid inflammation or autoimmune thyroid disease in susceptible individuals",
+      "Very high doses from supplements or certain seaweeds can be toxic"
+    ],
+    "deficiencySigns": [
+      "Goiter (enlarged thyroid gland) due to increased TSH stimulation",
+      "Hypothyroidism with symptoms such as fatigue, cold intolerance and weight gain",
+      "Impaired cognitive function and slowed metabolism",
+      "In pregnancy, severe deficiency can cause cretinism, miscarriage and developmental delays",
+      "In children, stunted growth and reduced intellectual performance"
+    ]
+  },
+  {
+    "micromineral": "FLUORIDE",
+    "overview": "Fluoride is a trace mineral that strengthens tooth enamel and helps prevent dental caries. It also influences bone mineralization and is naturally present in water, soil and some foods. Fluoride supports mineralization processes in teeth and bones.",
+    "benefits": [
+      "Strengthens tooth enamel and increases resistance to acid-related decay",
+      "Helps remineralize areas of early tooth demineralization",
+      "Contributes to reduced risk of dental caries in both children and adults",
+      "Supports bone mineralization at appropriate intake levels"
+    ],
+    "sideEffects": [
+      "Excessive fluoride intake during tooth development can cause dental fluorosis, characterized by mottled or discolored enamel",
+      "Very high intake over long periods can cause skeletal fluorosis, leading to joint stiffness and bone abnormalities",
+      "Acute fluoride toxicity from high-dose ingestion causes nausea, vomiting and abdominal pain"
+    ],
+    "deficiencySigns": [
+      "Increased risk of dental caries due to less resistant tooth enamel",
+      "Reduced remineralization capacity of teeth",
+      "Potentially weaker enamel formation during childhood if intake is chronically low"
+    ]
+  },
+  {
+    "micromineral": "CHROMIUM",
+    "overview": "Chromium is an essential trace mineral involved in carbohydrate and lipid metabolism. It enhances the action of insulin and helps regulate blood glucose levels. It is required in very small amounts and found in a variety of foods.",
+    "benefits": [
+      "Enhances insulin signaling and contributes to normal glucose metabolism",
+      "Supports normal lipid metabolism and may assist in maintaining healthy cholesterol levels",
+      "Contributes to macronutrient metabolism including carbohydrates, fats and proteins",
+      "May help improve glucose tolerance in individuals with marginal chromium status"
+    ],
+    "sideEffects": [
+      "Excessive supplementation with certain chromium forms can cause gastrointestinal discomfort",
+      "Very high doses may cause kidney or liver impairment in rare cases",
+      "Some poorly regulated supplements have been associated with allergic reactions or skin irritation"
+    ],
+    "deficiencySigns": [
+      "Impaired glucose tolerance and elevated insulin levels",
+      "Peripheral neuropathy and weight loss in severe deficiency (rare in developed countries)",
+      "Increased blood lipid abnormalities",
+      "Worsened blood sugar regulation in susceptible individuals"
+    ]
+  },
+  {
+    "micromineral": "MOLYBDENUM",
+    "overview": "Molybdenum is an essential trace mineral that acts as a cofactor for several important enzymes, including those involved in sulfur amino acid metabolism, detoxification of sulfite and breakdown of purines. It is required in very small amounts and is widely distributed in plant foods.",
+    "benefits": [
+      "Acts as a cofactor for enzymes such as sulfite oxidase, xanthine oxidase and aldehyde oxidase",
+      "Supports detoxification of sulfites, preventing accumulation of toxic intermediates",
+      "Involved in metabolism of sulfur-containing amino acids",
+      "Contributes to normal breakdown and recycling of purines and other compounds"
+    ],
+    "sideEffects": [
+      "Excessive molybdenum intake from supplements can cause elevated uric acid levels and gout-like symptoms",
+      "Very high doses may interfere with copper metabolism and cause neurological or joint issues",
+      "Toxicity from food intake alone is extremely rare due to low typical intakes"
+    ],
+    "deficiencySigns": [
+      "Deficiency is extremely rare but may cause sulfite sensitivity, neurological abnormalities and metabolic disturbances",
+      "Hypotonia, seizures and developmental issues observed in rare genetic defects affecting molybdenum cofactor production",
+      "Increased levels of toxic sulfite intermediates in severe deficiency states"
+    ]
+  }
+]

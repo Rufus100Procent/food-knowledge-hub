@@ -1,0 +1,277 @@
+[
+  {
+    "vitamin": "A",
+    "overview": "Vitamin A is a fat-soluble vitamin that refers to a group of compounds including retinol, retinal and retinyl esters. It is essential for normal vision, immune function, reproduction, and the growth and differentiation of many tissues, especially epithelial tissues and the developing embryo.",
+    "benefits": [
+      "Supports normal vision, particularly low-light (scotopic) vision through its role in the visual cycle in the retina",
+      "Maintains integrity and function of epithelial tissues in the skin, respiratory tract, gastrointestinal tract and urinary tract",
+      "Plays a key role in immune function, including development and regulation of innate and adaptive immune responses",
+      "Supports normal growth, skeletal development and cellular differentiation during childhood",
+      "Required for normal reproduction and development of the embryo and fetus",
+      "Contributes to normal maintenance and repair of mucous membranes, helping protect against infection"
+    ],
+    "sideEffects": [
+      "Chronic intake of high doses of preformed vitamin A (retinol) can cause toxicity with symptoms such as headache, nausea, dizziness, blurred vision and liver dysfunction",
+      "Very high intakes over time may lead to bone demineralization and increased fracture risk",
+      "Excess preformed vitamin A during pregnancy is associated with teratogenic effects and an increased risk of birth defects",
+      "High-dose supplements can interact with certain medications (for example retinoid drugs) and increase toxicity risk"
+    ],
+    "deficiencySigns": [
+      "Night blindness and impaired ability to see in low light",
+      "Dry, rough skin and dry conjunctiva; Bitot spots on the eye in more advanced deficiency",
+      "Xerophthalmia, corneal drying and in severe cases corneal ulceration and blindness",
+      "Increased susceptibility to infections, especially respiratory and gastrointestinal infections",
+      "Impaired growth in children and potential effects on fertility and reproduction"
+    ]
+  },
+  {
+    "vitamin": "B1_THIAMINE",
+    "overview": "Vitamin B1 (thiamine) is a water-soluble B vitamin that acts as a coenzyme in carbohydrate and branched-chain amino acid metabolism. It is critical for energy production in cells, particularly in tissues with high metabolic demand such as the nervous system and heart.",
+    "benefits": [
+      "Supports normal energy metabolism by helping convert carbohydrates into ATP",
+      "Essential for proper functioning of the nervous system through its role in nerve conduction and neurotransmitter synthesis",
+      "Contributes to normal heart function and helps maintain cardiac energy metabolism",
+      "Supports normal psychological function, including memory and concentration"
+    ],
+    "sideEffects": [
+      "Thiamine from food has no known toxicity because excess amounts are rapidly excreted in urine",
+      "Adverse effects from oral thiamine supplements are rare and usually limited to very high doses or parenteral administration (for example allergic reactions in rare cases)"
+    ],
+    "deficiencySigns": [
+      "Beriberi, which can present as wet beriberi (cardiovascular involvement with edema, tachycardia, heart failure) or dry beriberi (peripheral neuropathy, muscle weakness, loss of reflexes)",
+      "Wernicke–Korsakoff syndrome in severe, prolonged deficiency, particularly in the context of chronic alcohol misuse, characterized by confusion, ataxia, eye movement abnormalities and memory disturbances",
+      "Fatigue, irritability, poor appetite and general weakness in milder deficiency"
+    ]
+  },
+  {
+    "vitamin": "B2_RIBOFLAVIN",
+    "overview": "Vitamin B2 (riboflavin) is a water-soluble vitamin that serves as a precursor of the coenzymes FMN and FAD, which are involved in numerous oxidation–reduction reactions in energy production and cellular metabolism.",
+    "benefits": [
+      "Supports normal energy-yielding metabolism through its role in mitochondrial electron transport and fat, carbohydrate and protein metabolism",
+      "Contributes to maintenance of normal mucous membranes, skin and eyes",
+      "Acts indirectly in antioxidant defense as part of glutathione reductase activity",
+      "Supports normal functioning of the nervous system"
+    ],
+    "sideEffects": [
+      "Riboflavin has very low toxicity, and no adverse effects from high intakes from food or supplements have been clearly documented",
+      "High supplemental doses may cause harmless yellow-orange discoloration of urine"
+    ],
+    "deficiencySigns": [
+      "Angular cheilitis (cracking and sores at the corners of the mouth)",
+      "Glossitis (magenta-colored, sore tongue) and inflammation of the oral mucosa",
+      "Seborrheic dermatitis-like skin changes, particularly around the nose and mouth",
+      "Ocular symptoms such as photophobia, itching and burning eyes",
+      "In advanced deficiency, anemia and neurologic symptoms may occur along with other B-vitamin deficiencies"
+    ]
+  },
+  {
+    "vitamin": "B3_NIACIN",
+    "overview": "Vitamin B3 (niacin) is a water-soluble vitamin that refers to nicotinic acid and nicotinamide. It is a precursor for the coenzymes NAD and NADP, which are required for hundreds of oxidation–reduction reactions in energy metabolism and biosynthetic pathways.",
+    "benefits": [
+      "Supports normal energy metabolism and ATP production via its role in NAD and NADP-dependent reactions",
+      "Important for normal function of the nervous system, skin and digestive system",
+      "Contributes to maintenance of normal skin and mucous membranes",
+      "At pharmacological doses, nicotinic acid can improve lipid profiles under medical supervision by lowering LDL cholesterol and triglycerides and raising HDL cholesterol"
+    ],
+    "sideEffects": [
+      "High-dose nicotinic acid supplements can cause flushing, warmth, itching, burning sensation and headache, particularly when doses are increased rapidly",
+      "Sustained high intakes may cause liver enzyme elevations, hepatotoxicity, gastrointestinal upset and increased blood glucose in some individuals",
+      "Very high doses may increase uric acid and precipitate gout in susceptible people"
+    ],
+    "deficiencySigns": [
+      "Pellagra, classically described as the triad of dermatitis, diarrhea and dementia",
+      "Symmetrical, sun-exposed dermatitis with redness, scaling and hyperpigmentation",
+      "Glossitis, stomatitis and gastrointestinal disturbances including diarrhea and abdominal discomfort",
+      "Neurologic and psychiatric symptoms such as apathy, confusion, irritability and in severe cases dementia"
+    ]
+  },
+  {
+    "vitamin": "B5_PANTOTHENIC_ACID",
+    "overview": "Vitamin B5 (pantothenic acid) is a water-soluble vitamin that is a component of coenzyme A and acyl carrier protein. It is required for the synthesis and metabolism of fatty acids, cholesterol, steroid hormones and some neurotransmitters.",
+    "benefits": [
+      "Essential for synthesis of coenzyme A, a key cofactor in energy metabolism and fatty acid oxidation",
+      "Supports synthesis of steroid hormones, vitamin D and some neurotransmitters",
+      "Contributes to normal energy-yielding metabolism and reduction of tiredness and fatigue"
+    ],
+    "sideEffects": [
+      "Pantothenic acid is widely distributed in foods and has very low toxicity",
+      "Very high supplemental intakes may cause gastrointestinal disturbance such as mild diarrhea or nausea in some individuals"
+    ],
+    "deficiencySigns": [
+      "Frank deficiency is rare and usually seen only in severe malnutrition or experimental settings",
+      "Reported symptoms include fatigue, irritability, numbness and burning sensations in the hands and feet, headache and gastrointestinal discomfort",
+      "Often occurs together with deficiency of other B vitamins rather than in isolation"
+    ]
+  },
+  {
+    "vitamin": "B6_PYRIDOXINE",
+    "overview": "Vitamin B6 is a water-soluble vitamin that refers to a group of related compounds, including pyridoxine, pyridoxal and pyridoxamine and their phosphorylated forms. Its active form, pyridoxal 5-phosphate, acts as a coenzyme in more than 100 enzymatic reactions, mainly in amino acid metabolism, neurotransmitter synthesis and hemoglobin formation.",
+    "benefits": [
+      "Involved in amino acid metabolism, including transamination, decarboxylation and deamination reactions",
+      "Essential for synthesis of neurotransmitters such as serotonin, dopamine, gamma-aminobutyric acid (GABA) and norepinephrine",
+      "Required for hemoglobin synthesis and normal formation of red blood cells",
+      "Contributes to normal homocysteine metabolism together with folate and vitamin B12",
+      "Supports normal immune function and brain development during pregnancy and infancy"
+    ],
+    "sideEffects": [
+      "High-dose vitamin B6 supplements taken chronically can cause sensory neuropathy characterized by tingling, burning, numbness and difficulty walking; in some cases this can be irreversible",
+      "Very high supplemental intakes may lead to photosensitivity, skin lesions and gastrointestinal upset",
+      "Toxicity is generally associated with long-term intake of doses far above usual dietary requirements, particularly from supplements"
+    ],
+    "deficiencySigns": [
+      "Microcytic anemia due to impaired hemoglobin synthesis",
+      "Dermatitis with scaling and cracking around the mouth and nose, and glossitis",
+      "Depression, confusion and irritability, reflecting effects on neurotransmitter metabolism",
+      "In infants, severe deficiency can cause seizures and irritability",
+      "Elevated homocysteine levels when deficiency coexists with low folate or vitamin B12"
+    ]
+  },
+  {
+    "vitamin": "B7_BIOTIN",
+    "overview": "Vitamin B7 (biotin) is a water-soluble vitamin that functions as a coenzyme for carboxylase enzymes involved in fatty acid synthesis, gluconeogenesis and amino acid metabolism. It also has roles in gene regulation.",
+    "benefits": [
+      "Serves as a cofactor for carboxylase enzymes that support energy metabolism and synthesis of fatty acids",
+      "Contributes to normal metabolism of macronutrients including fats, carbohydrates and proteins",
+      "Helps maintain normal hair, skin and mucous membranes",
+      "Involved in regulation of gene expression via biotinylation of histones"
+    ],
+    "sideEffects": [
+      "Biotin has not been associated with toxicity at typical dietary intake levels",
+      "Very high supplemental doses can interfere with certain immunoassays, including some thyroid function tests and cardiac biomarkers, potentially leading to misleading laboratory results"
+    ],
+    "deficiencySigns": [
+      "Deficiency is rare but can occur with prolonged parenteral nutrition without biotin, genetic defects of biotin metabolism or excessive consumption of raw egg whites (due to avidin binding biotin)",
+      "Symptoms include thinning hair, hair loss and scaly, red dermatitis around the eyes, nose and mouth",
+      "Neurologic symptoms such as depression, lethargy, hallucinations and numbness or tingling of the extremities may occur",
+      "In infants, hypotonia, lethargy and developmental delay may appear in severe deficiency"
+    ]
+  },
+  {
+    "vitamin": "B9_FOLATE",
+    "overview": "Vitamin B9 (folate) is a water-soluble vitamin involved in one-carbon metabolism. It is essential for DNA synthesis and repair, methylation reactions and normal cell division. Naturally occurring folates in foods and synthetic folic acid in supplements and fortified foods share similar biological activity after metabolism.",
+    "benefits": [
+      "Required for synthesis of nucleic acids and thus essential for DNA replication and cell division",
+      "Supports normal development of the neural tube in early pregnancy; adequate folate status before and during early pregnancy reduces the risk of neural tube defects",
+      "Contributes to normal formation of red and white blood cells in the bone marrow",
+      "Plays a role in homocysteine metabolism together with vitamin B12 and vitamin B6, influencing cardiovascular risk factors",
+      "Supports normal psychological function and cognitive health through its role in methylation reactions"
+    ],
+    "sideEffects": [
+      "Folate from food is not associated with toxicity",
+      "High intakes of synthetic folic acid from supplements and fortified foods may mask hematologic signs of vitamin B12 deficiency while allowing neurologic damage to progress if B12 deficiency is unrecognized",
+      "Very high doses may cause gastrointestinal discomfort or sleep disturbances in some individuals"
+    ],
+    "deficiencySigns": [
+      "Megaloblastic anemia characterized by large, immature red blood cells and symptoms such as fatigue, weakness, shortness of breath and pallor",
+      "Glossitis, mouth ulcers and gastrointestinal disturbances (for example diarrhea or loss of appetite)",
+      "In pregnancy, low folate status increases the risk of fetal neural tube defects such as spina bifida and anencephaly",
+      "Elevated homocysteine levels when folate status is poor",
+      "In severe, prolonged deficiency, cognitive changes and irritability may be present, often together with other deficiencies"
+    ]
+  },
+  {
+    "vitamin": "B12_COBALAMIN",
+    "overview": "Vitamin B12 (cobalamin) is a water-soluble vitamin that contains cobalt. It is required as a cofactor for enzymes involved in methylation reactions and in the conversion of certain fatty acids and amino acids. It is essential for normal red blood cell formation, neurologic function and DNA synthesis.",
+    "benefits": [
+      "Supports normal formation and maturation of red blood cells in the bone marrow",
+      "Crucial for maintenance of myelin sheaths around nerves and normal neurologic function",
+      "Participates in homocysteine metabolism together with folate, influencing cardiovascular risk factors",
+      "Required for DNA synthesis and cell division, particularly in rapidly dividing cells"
+    ],
+    "sideEffects": [
+      "Vitamin B12 from food and typical supplements has very low toxicity and no upper intake level has been established for healthy individuals",
+      "In rare cases, high-dose injections may cause acneiform eruptions or hypersensitivity reactions"
+    ],
+    "deficiencySigns": [
+      "Megaloblastic anemia with symptoms such as fatigue, paleness, shortness of breath and weakness",
+      "Neurologic manifestations including peripheral neuropathy, numbness and tingling in hands and feet, difficulty walking, and impaired balance",
+      "Cognitive and psychiatric changes such as memory impairment, confusion, depression and irritability",
+      "Glossitis, mouth ulcers and loss of appetite",
+      "In long-standing deficiency, neurologic damage can become irreversible if not treated"
+    ]
+  },
+  {
+    "vitamin": "C",
+    "overview": "Vitamin C (ascorbic acid) is a water-soluble vitamin that functions as an antioxidant and as a cofactor for several enzymes. It is required for collagen synthesis, carnitine production and certain neurotransmitter pathways, and it enhances non-heme iron absorption from plant foods.",
+    "benefits": [
+      "Acts as an antioxidant, helping protect cells and tissues from oxidative damage caused by free radicals",
+      "Required for hydroxylation reactions in collagen synthesis, supporting normal structure of skin, blood vessels, bones, cartilage and other connective tissues",
+      "Enhances intestinal absorption of non-heme iron from plant-based foods, helping prevent iron deficiency in susceptible individuals",
+      "Supports normal immune function, including barrier function and various cellular immune responses",
+      "Involved in synthesis of norepinephrine and other biochemical pathways"
+    ],
+    "sideEffects": [
+      "High-dose vitamin C supplements can cause gastrointestinal upset, including diarrhea, abdominal cramps and nausea",
+      "Very large intakes may increase urinary oxalate and, in susceptible individuals, could contribute to kidney stone formation",
+      "Abrupt discontinuation of very high doses may theoretically increase risk of transient low status, although clinically significant rebound deficiency is uncommon"
+    ],
+    "deficiencySigns": [
+      "Scurvy, characterized by fatigue, weakness, anemia and impaired collagen synthesis",
+      "Bleeding gums, loosened teeth, easy bruising, petechiae and poor wound healing",
+      "Joint pain and swelling, corkscrew hairs and skin changes",
+      "In advanced cases, severe anemia, infections and potentially fatal complications"
+    ]
+  },
+  {
+    "vitamin": "D",
+    "overview": "Vitamin D is a fat-soluble vitamin that can be synthesized in the skin by exposure to ultraviolet B radiation and is also obtained from foods and supplements. In the body it is converted to active hormone forms that regulate calcium and phosphorus homeostasis and are critical for bone health and other physiological processes.",
+    "benefits": [
+      "Promotes efficient intestinal absorption of calcium and phosphorus",
+      "Helps maintain normal blood levels of calcium and phosphorus, supporting mineralization of bone and teeth",
+      "Together with calcium, reduces the risk of rickets in children and osteomalacia in adults",
+      "Contributes to maintenance of normal muscle function and may help reduce fall risk in older adults when intake is adequate",
+      "Modulates immune function and has roles in many tissues with vitamin D receptors"
+    ],
+    "sideEffects": [
+      "Excessive vitamin D intake from high-dose supplements can cause hypercalcemia, leading to nausea, vomiting, weakness and frequent urination",
+      "Severe hypercalcemia from toxicity can cause calcification of soft tissues, kidney stones and kidney damage, cardiac arrhythmias and confusion",
+      "Toxicity is almost always due to supplement overuse, not sun exposure or typical dietary intake"
+    ],
+    "deficiencySigns": [
+      "In children, deficiency can cause rickets, with impaired bone mineralization, bone deformities and delayed growth",
+      "In adults, deficiency can lead to osteomalacia, characterized by bone pain, muscle weakness and increased fracture risk",
+      "Low vitamin D status is associated with reduced bone mineral density and increased risk of osteoporosis in older adults",
+      "Muscle weakness, increased fall risk and nonspecific musculoskeletal pain may occur with low status"
+    ]
+  },
+  {
+    "vitamin": "E",
+    "overview": "Vitamin E is a fat-soluble vitamin that refers mainly to alpha-tocopherol in human nutrition. It functions primarily as a lipid-soluble antioxidant, protecting cell membranes from oxidative damage. It also influences cell signaling and gene expression.",
+    "benefits": [
+      "Acts as a major lipid-phase antioxidant, protecting polyunsaturated fatty acids in cell membranes from oxidative damage",
+      "Supports maintenance of normal immune function, particularly in older adults",
+      "Contributes to protection of cells from oxidative stress in many tissues",
+      "Plays roles in modulation of cell signaling and gene expression"
+    ],
+    "sideEffects": [
+      "High-dose vitamin E supplements can increase the risk of bleeding by antagonizing vitamin K–dependent clotting factors, especially in individuals on anticoagulant therapy",
+      "Very high long-term supplemental doses have been associated in some studies with increased risk of hemorrhagic stroke",
+      "Gastrointestinal upset, fatigue or weakness can occur in some individuals taking large doses"
+    ],
+    "deficiencySigns": [
+      "Deficiency is rare in healthy individuals but can occur with fat malabsorption syndromes or certain genetic disorders",
+      "Neuromuscular problems such as peripheral neuropathy, ataxia and muscle weakness due to oxidative damage to nervous tissue",
+      "Retinopathy and impaired vision in severe, prolonged deficiency",
+      "Hemolytic anemia in premature infants or individuals with very low vitamin E status"
+    ]
+  },
+  {
+    "vitamin": "K",
+    "overview": "Vitamin K is a group of fat-soluble compounds, principally phylloquinone (vitamin K1) from plant foods and menaquinones (vitamin K2) from animal foods and bacterial synthesis. It is required as a cofactor for the gamma-carboxylation of specific glutamate residues in proteins involved in blood coagulation, bone metabolism and other processes.",
+    "benefits": [
+      "Essential for activation of several clotting factors (II, VII, IX and X) and anticoagulant proteins C and S, thereby supporting normal blood coagulation",
+      "Contributes to activation of osteocalcin and other proteins involved in bone mineralization and bone health",
+      "Supports normal vascular function by enabling carboxylation of matrix Gla protein, which helps inhibit vascular calcification"
+    ],
+    "sideEffects": [
+      "No adverse effects from high intakes of vitamin K1 from foods have been clearly documented in healthy individuals",
+      "Vitamin K can interact with anticoagulant medications such as warfarin; abrupt changes in vitamin K intake or high-dose supplements can alter the anticoagulant effect and require medical supervision",
+      "Synthetic forms given in excessive doses by injection have been associated with adverse reactions in infants in the past, but this is not relevant to usual dietary intake"
+    ],
+    "deficiencySigns": [
+      "Prolonged blood clotting time and increased tendency to bleed or bruise easily",
+      "In newborns, severe deficiency can lead to vitamin K deficiency bleeding, a potentially life-threatening hemorrhagic condition",
+      "In adults with chronic low intake or fat malabsorption, increased risk of bleeding and, over time, potential adverse effects on bone health"
+    ]
+  }
+]

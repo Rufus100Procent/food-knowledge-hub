@@ -1,7 +1,11 @@
-package com.example.foodknowledgehub.service;
+package com.example.foodknowledgehub.service.mapper;
 import com.example.foodknowledgehub.dto.*;
 import com.example.foodknowledgehub.modal.*;
 
+import com.example.foodknowledgehub.modal.miniral.MacromineralAmount;
+import com.example.foodknowledgehub.modal.miniral.MacronutrientProfile;
+import com.example.foodknowledgehub.modal.miniral.MicromineralAmount;
+import com.example.foodknowledgehub.modal.vitamin.VitaminAmount;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.example.foodknowledgehub.modal;
+package com.example.foodknowledgehub.modal.miniral;
 
 import jakarta.persistence.Embeddable;
 

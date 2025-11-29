@@ -1,6 +1,6 @@
 package com.example.foodknowledgehub.dto;
 
-import com.example.foodknowledgehub.modal.Macromineral;
+import com.example.foodknowledgehub.modal.miniral.Macromineral;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;

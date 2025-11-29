@@ -1,4 +1,4 @@
-package com.example.foodknowledgehub.modal;
+package com.example.foodknowledgehub.modal.miniral;
 
 // Nutrition science recognizes nine essential microminerals (trace minerals).
 public enum Micromineral {

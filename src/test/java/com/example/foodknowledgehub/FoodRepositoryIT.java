@@ -1,7 +1,11 @@
 package com.example.foodknowledgehub;
 
 
+import com.example.foodknowledgehub.helper.AbstractPostgresContainer;
 import com.example.foodknowledgehub.modal.*;
+import com.example.foodknowledgehub.modal.miniral.*;
+import com.example.foodknowledgehub.modal.vitamin.Vitamin;
+import com.example.foodknowledgehub.modal.vitamin.VitaminAmount;
 import com.example.foodknowledgehub.repo.FoodRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

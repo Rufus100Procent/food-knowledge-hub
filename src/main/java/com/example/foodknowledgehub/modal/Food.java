@@ -1,5 +1,9 @@
 package com.example.foodknowledgehub.modal;
 
+import com.example.foodknowledgehub.modal.miniral.MacromineralAmount;
+import com.example.foodknowledgehub.modal.miniral.MacronutrientProfile;
+import com.example.foodknowledgehub.modal.miniral.MicromineralAmount;
+import com.example.foodknowledgehub.modal.vitamin.VitaminAmount;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 

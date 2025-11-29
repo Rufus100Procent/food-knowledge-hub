@@ -1,4 +1,4 @@
-package com.example.foodknowledgehub.modal;
+package com.example.foodknowledgehub.modal.vitamin;
 
 // vitamin divide into 2 Water-soluble and  Fat-soluble
 public enum Vitamin {

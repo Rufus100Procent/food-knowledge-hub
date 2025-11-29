@@ -1,4 +1,4 @@
-package com.example.foodknowledgehub.modal;
+package com.example.foodknowledgehub.modal.miniral;
 
 // there are 7 macrominerals
 // Needed in larger daily amounts

@@ -3,6 +3,7 @@ package com.example.foodknowledgehub.service;
 import com.example.foodknowledgehub.dto.*;
 import com.example.foodknowledgehub.modal.*;
 import com.example.foodknowledgehub.repo.FoodRepository;
+import com.example.foodknowledgehub.service.mapper.FoodMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

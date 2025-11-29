@@ -18,7 +18,7 @@ public class FoodDto {
     @Size(max = 4000, message = "Overview cannot exceed 4000 characters.")
     private String overview;
 
-    @Size(max = 5, message = "Benefits list cannot contain more than 50 items.")
+    @Size(max = 50, message = "Benefits list cannot contain more than 50 items.")
     private List<
             @NotBlank(message = "Benefit text cannot be blank.")
             @Size(max = 255, message = "Benefit text cannot exceed 255 characters.")
@@ -40,6 +40,7 @@ public class FoodDto {
     @Size(max = 50, message = "Vitamins list cannot exceed 50 entries.")
     private List<VitaminAmountDto> vitamins;
 
+    //<editor-fold desc="Getters and Setters">
 
     public String getName() {
         return name;
@@ -104,4 +105,7 @@ public class FoodDto {
     public void setVitamins(List<VitaminAmountDto> vitamins) {
         this.vitamins = vitamins;
     }
+
+    //</editor-fold>
+
 }

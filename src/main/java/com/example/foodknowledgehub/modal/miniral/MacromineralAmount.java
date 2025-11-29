@@ -1,4 +1,4 @@
-package com.example.foodknowledgehub.modal;
+package com.example.foodknowledgehub.modal.miniral;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
@@ -6,11 +6,11 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 
 @Embeddable
-public class VitaminAmount {
+public class MacromineralAmount {
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "vitamin")
-    private Vitamin vitamin;
+    @Column(name = "macromineral")
+    private Macromineral macromineral;
 
     @Column(name = "amount_mg")
     private double amountMilligrams;
@@ -20,12 +20,12 @@ public class VitaminAmount {
 
     //<editor-fold desc="Getters and Setters">
 
-    public Vitamin getVitamin() {
-        return vitamin;
+    public Macromineral getMacromineral() {
+        return macromineral;
     }
 
-    public void setVitamin(Vitamin vitamin) {
-        this.vitamin = vitamin;
+    public void setMacromineral(Macromineral macromineral) {
+        this.macromineral = macromineral;
     }
 
     public double getAmountMilligrams() {
@@ -45,3 +45,4 @@ public class VitaminAmount {
     }
     //</editor-fold>
 }
+

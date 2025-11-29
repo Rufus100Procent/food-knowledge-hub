@@ -1,5 +1,6 @@
 package com.example.foodknowledgehub;
 
+import com.example.foodknowledgehub.helper.AbstractPostgresContainer;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;

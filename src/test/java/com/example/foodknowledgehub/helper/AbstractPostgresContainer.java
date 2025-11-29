@@ -1,17 +1,17 @@
-package com.example.foodknowledgehub;
+package com.example.foodknowledgehub.helper;
 
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
-@Testcontainers
 public abstract class AbstractPostgresContainer {
 
-    @Container
     protected static final PostgreSQLContainer<?> POSTGRES =
             new PostgreSQLContainer<>("postgres:17.1");
+
+    static {
+        POSTGRES.start();
+    }
 
     @DynamicPropertySource
     static void registerDataSourceProperties(DynamicPropertyRegistry registry) {
@@ -21,3 +21,4 @@ public abstract class AbstractPostgresContainer {
         registry.add("spring.jpa.hibernate.ddl-auto", () -> "update");
     }
 }
+

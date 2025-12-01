@@ -24,7 +24,7 @@ very simple project with the goal to dive deeper into code Testing
 
 ### Getting started
 * git clone 
-* `cd vitamin-knowladge-hub`
+* `cd food-knowledge-hub`
 *  ```./mvnw spring-boot:run -Dspring-boot.run.profiles=dev```
 
 

@@ -7,6 +7,8 @@ import jakarta.validation.constraints.Size;
 import java.util.List;
 
 public class FoodDto {
+    public FoodDto() {
+    }
 
     @NotBlank(message = "Food name cannot be blank.")
     @Size(min = 1, max = 90 , message = "Food name must be between 1 and 100 characters.")
@@ -39,6 +41,11 @@ public class FoodDto {
     @Valid
     @Size(max = 50, message = "Vitamins list cannot exceed 50 entries.")
     private List<VitaminAmountDto> vitamins;
+
+    public FoodDto(String name) {
+        this.name = name;
+    }
+
 
     //<editor-fold desc="Getters and Setters">
 

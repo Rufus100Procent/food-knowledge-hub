@@ -47,10 +47,10 @@ class UserServiceTest {
     void registerUser_savesUserWithEncodedPasswordAndReturnsId() {
         RegisterUserDto dto = new RegisterUserDto();
         dto.setFullName("Test User");
-        dto.setUserName("testuser");
+        dto.setUserName("testUser");
         dto.setPassword("Secret123");
 
-        when(usersRepository.findByUserName("testuser"))
+        when(usersRepository.findByUserName("testUser"))
                 .thenReturn(Optional.empty());
 
         when(passwordEncoder.encode("Secret123"))
@@ -72,7 +72,7 @@ class UserServiceTest {
         Users saved = userCaptor.getValue();
 
         assertEquals("Test User", saved.getFullName());
-        assertEquals("testuser", saved.getUserName());
+        assertEquals("testUser", saved.getUserName());
         assertEquals("encoded-secret", saved.getPasswordHash());
         assertEquals(Role.USER_ROLE, saved.getRole());
         assertFalse(saved.isAccountLocked());
@@ -83,19 +83,17 @@ class UserServiceTest {
     void registerUser_throwsWhenUsernameAlreadyTaken() {
         RegisterUserDto dto = new RegisterUserDto();
         dto.setFullName("Existing User");
-        dto.setUserName("takenuser");
+        dto.setUserName("takenUser");
         dto.setPassword("Secret123");
 
         Users existing = new Users();
         existing.setId(UUID.randomUUID());
-        existing.setUserName("takenuser");
+        existing.setUserName("takenUser");
 
-        when(usersRepository.findByUserName("takenuser"))
+        when(usersRepository.findByUserName("takenUser"))
                 .thenReturn(Optional.of(existing));
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            userService.registerUser(dto);
-        });
+        assertThrows(IllegalArgumentException.class, () -> userService.registerUser(dto));
 
         verify(usersRepository, never()).save(any(Users.class));
     }
@@ -106,7 +104,7 @@ class UserServiceTest {
         UUID id = UUID.randomUUID();
         user.setId(id);
         user.setFullName("Auth User");
-        user.setUserName("authuser");
+        user.setUserName("authUser");
         user.setPasswordHash("hash");
         user.setRole(Role.USER_ROLE);
         user.setAccountLocked(false);
@@ -122,7 +120,7 @@ class UserServiceTest {
         assertNotNull(dto);
         assertEquals(id, dto.getId());
         assertEquals("Auth User", dto.getFullName());
-        assertEquals("authuser", dto.getUserName());
+        assertEquals("authUser", dto.getUserName());
         assertEquals(Role.USER_ROLE, dto.getRole());
         assertFalse(dto.isAccountLocked());
         assertNotNull(dto.getCreatedAt());
@@ -165,7 +163,7 @@ class UserServiceTest {
 
         assertEquals(2, result.size());
 
-        UserDto d1 = result.get(0);
+        UserDto d1 = result.getFirst();
         assertEquals(u1.getId(), d1.getId());
         assertEquals("User One", d1.getFullName());
         assertEquals("user1", d1.getUserName());

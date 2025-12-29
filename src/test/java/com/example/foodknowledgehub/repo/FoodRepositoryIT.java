@@ -1,15 +1,16 @@
-package com.example.foodknowledgehub;
+package com.example.foodknowledgehub.repo;
 
 
 import com.example.foodknowledgehub.helper.AbstractPostgresContainer;
+import com.example.foodknowledgehub.helper.FoodHelper;
 import com.example.foodknowledgehub.modal.*;
 import com.example.foodknowledgehub.modal.miniral.*;
 import com.example.foodknowledgehub.modal.vitamin.Vitamin;
-import com.example.foodknowledgehub.modal.vitamin.VitaminAmount;
-import com.example.foodknowledgehub.repo.FoodRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -21,42 +22,7 @@ class FoodRepositoryIT extends AbstractPostgresContainer {
 
     @Test
     void saveAndLoadFood() {
-
-        Food banana = new Food();
-        banana.setName("Banana");
-        banana.setImageUrl("https://example.com/banana.png");
-        banana.setOverview("Yellow potassium stick.");
-        banana.getBenefits().add("High in potassium");
-        banana.getBenefits().add("Easy snack");
-
-        MacronutrientProfile macros = new MacronutrientProfile();
-        macros.setCalories(890);
-        macros.setProteinGrams(1.1);
-        macros.setFatGrams(0.3);
-        macros.setCarbohydratesGrams(23);
-        macros.setFiberGrams(2.6);
-        macros.setSugarGrams(12);
-        banana.setMacronutrients(macros);
-
-        MacromineralAmount potassium = new MacromineralAmount();
-        potassium.setMacromineral(Macromineral.POTASSIUM);
-        potassium.setAmountMilligrams(358);
-        potassium.setDailyValuePercent(10);
-        banana.getMacrominerals().add(potassium);
-
-        MicromineralAmount manganese = new MicromineralAmount();
-        manganese.setMicromineral(Micromineral.MANGANESE);
-        manganese.setAmountMilligrams(0.27);
-        manganese.setDailyValuePercent(13);
-        banana.getMicrominerals().add(manganese);
-
-        VitaminAmount b6 = new VitaminAmount();
-        b6.setVitamin(Vitamin.B6_PYRIDOXINE);
-        b6.setAmountMilligrams(0.4);
-        b6.setDailyValuePercent(20);
-        banana.getVitamins().add(b6);
-
-        Food saved = foodRepository.save(banana);
+        Food saved = foodRepository.save(FoodHelper.fullBanana());
 
         Food found = foodRepository.findById(saved.getId())
                 .orElseThrow(() -> new RuntimeException("Food not found"));
@@ -83,5 +49,46 @@ class FoodRepositoryIT extends AbstractPostgresContainer {
         assertEquals(Vitamin.B6_PYRIDOXINE, found.getVitamins().getFirst().getVitamin());
         assertEquals(0.4, found.getVitamins().getFirst().getAmountMilligrams());
     }
-}
 
+    @Test
+    void findDistinctByMacrominerals_Macromineral_returnsMatchingFoodsOnly() {
+        foodRepository.saveAll(List.of(
+                FoodHelper.bananaWithPotassium(),
+                FoodHelper.milkWithCalcium()
+        ));
+
+        List<Food> result =
+                foodRepository.findDistinctByMacrominerals_Macromineral(Macromineral.POTASSIUM);
+
+        assertEquals(1, result.size());
+        assertEquals("Banana", result.getFirst().getName());
+    }
+
+    @Test
+    void findDistinctByMicrominerals_Micromineral_returnsMatchingFoodsOnly() {
+        foodRepository.saveAll(List.of(
+                FoodHelper.spinachWithIron(),
+                FoodHelper.apple()
+        ));
+
+        List<Food> result =
+                foodRepository.findDistinctByMicrominerals_Micromineral(Micromineral.IRON);
+
+        assertEquals(1, result.size());
+        assertEquals("Spinach", result.getFirst().getName());
+    }
+
+    @Test
+    void findDistinctByVitamins_Vitamin_returnsMatchingFoodsOnly() {
+        foodRepository.saveAll(List.of(
+                FoodHelper.orangeWithVitaminC(),
+                FoodHelper.bread()
+        ));
+
+        List<Food> result =
+                foodRepository.findDistinctByVitamins_Vitamin(Vitamin.C);
+
+        assertEquals(1, result.size());
+        assertEquals("Orange", result.getFirst().getName());
+    }
+}

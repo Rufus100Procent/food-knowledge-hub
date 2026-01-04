@@ -74,3 +74,7 @@ very simple project with the goal to dive deeper into code Testing
 }
 
 ```
+
+
+### Future frontend, Here below is a test image, what it could look like
+<img width="1102" height="775" alt="image" src="https://github.com/user-attachments/assets/ddef4ee0-b4ac-4bb4-9338-87a6685c454a" />

@@ -6,9 +6,6 @@ on:
       version:
         required: true
         type: string
-      commit_message:
-        required: true
-        type: string
 
 jobs:
   build:

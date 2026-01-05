@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+
+permissions:
+  contents: write
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.meta.outputs.version }}
+      commit_message: ${{ steps.meta.outputs.commit_message }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - id: meta
+        shell: bash
+        run: |
+          set -e
+
+          DEFAULT_VERSION="0.1.0"
+
+          COMMIT_MESSAGE="${{ github.event.head_commit.message }}"
+          echo "commit_message=$COMMIT_MESSAGE" >> $GITHUB_OUTPUT
+
+          VERSION=""
+          if echo "$COMMIT_MESSAGE" | grep -qE "^Release: [0-9]+\.[0-9]+\.[0-9]+"; then
+            VERSION=$(echo "$COMMIT_MESSAGE" | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
+          fi
+
+          if [ -z "$VERSION" ]; then
+            BASE=$(git tag --sort=-v:refname \
+              | grep -E '^v?[0-9]+\.[0-9]+\.[0-9]+' \
+              | head -n 1 \
+              | sed 's/^v//')
+
+            [ -z "$BASE" ] && BASE="$DEFAULT_VERSION"
+
+            IFS=. read MAJOR MINOR PATCH <<< "$BASE"
+            VERSION="$MAJOR.$MINOR.$((PATCH+1))"
+          fi
+
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+  build:
+    needs: prepare
+    uses: ./.github/workflows/build.yml
+    with:
+      version: ${{ needs.prepare.outputs.version }}
+      commit_message: ${{ needs.prepare.outputs.commit_message }}
+    secrets: inherit
+
+  version:
+    needs: [prepare, build]
+    uses: ./.github/workflows/version.yml
+    with:
+      version: ${{ needs.prepare.outputs.version }}
+    secrets: inherit

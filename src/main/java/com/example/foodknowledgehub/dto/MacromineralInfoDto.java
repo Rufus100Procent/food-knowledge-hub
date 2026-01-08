@@ -27,6 +27,8 @@ public class MacromineralInfoDto {
             @Size(max = 255, message = "DeficiencySigns text cannot exceed 255 characters.")
                     String> deficiencySigns;
 
+    private String imageUrl;
+
     private List<FoodSummaryDto> foods;
     private boolean verified = false;
 
@@ -82,6 +84,14 @@ public class MacromineralInfoDto {
 
     public List<FoodSummaryDto> getFoods() {
         return foods;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public void setFoods(List<FoodSummaryDto> foods) {

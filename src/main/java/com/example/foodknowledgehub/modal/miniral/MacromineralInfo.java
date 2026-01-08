@@ -25,7 +25,7 @@ public class MacromineralInfo {
 
     @Column(length = 4000)
     private String deficiencySigns;
-
+    private String imageUrl;
     private boolean verified = false;
 
     public Long getId() {
@@ -78,6 +78,14 @@ public class MacromineralInfo {
 
     public String getDeficiencySigns() {
         return deficiencySigns;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public void setDeficiencySigns(String deficiencySigns) {

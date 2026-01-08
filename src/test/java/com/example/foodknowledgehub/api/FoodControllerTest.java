@@ -73,6 +73,53 @@ class FoodControllerTest {
         verify(foodService).getAllFoods();
     }
 
+    @Test
+    void getFood_returnFoodById() {
+        Long id = 1L;
+        FoodDto food = new FoodDto("Apple");
+        food.setId(id);
+
+        when(foodService.getFood(id)).thenReturn(food);
+
+        ResponseEntity<FoodDto> response = controller.getFood(id);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals(id, response.getBody().getId());
+        assertEquals("Apple", response.getBody().getName());
+
+        verify(foodService).getFood(id);
+    }
+    @Test
+    void updateFood_withoutImage_returnUpdatedFood() {
+        Long id = 1L;
+        FoodDto dto = new FoodDto("Apple");
+
+        FoodDto updated = new FoodDto("Apple Updated");
+
+        when(foodService.updateFood(id, dto)).thenReturn(updated);
+
+        ResponseEntity<FoodDto> response =
+                controller.updateFood(id, dto, null);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals("Apple Updated", response.getBody().getName());
+
+        verify(foodService).updateFood(id, dto);
+    }
+    @Test
+    void deleteFood_returnNoContent() {
+        Long id = 1L;
+
+        ResponseEntity<Void> response = controller.deleteFood(id);
+
+        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+        assertNull(response.getBody());
+
+        verify(foodService).deleteFood(id);
+    }
+
     @AfterEach
     void teardown() throws Exception {
         closeable.close();

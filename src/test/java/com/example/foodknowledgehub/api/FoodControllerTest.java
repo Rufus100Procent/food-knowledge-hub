@@ -12,6 +12,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockMultipartFile;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -52,6 +54,23 @@ class FoodControllerTest {
         assertEquals("Apple", response.getBody().getName());
 
         verify(foodService).createFood(dto, file);
+    }
+
+    @Test
+    void getAllFood() {
+        FoodDto food = new FoodDto();
+        List<FoodDto> foods = List.of(food);
+
+        when(foodService.getAllFoods()).thenReturn(foods);
+
+        ResponseEntity<List<FoodDto>> response = controller.getAllFoods();
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals(1, response.getBody().size());
+        assertEquals(food, response.getBody().getFirst());
+
+        verify(foodService).getAllFoods();
     }
 
     @AfterEach

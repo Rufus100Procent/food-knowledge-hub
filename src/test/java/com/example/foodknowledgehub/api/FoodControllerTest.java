@@ -90,6 +90,7 @@ class FoodControllerTest {
 
         verify(foodService).getFood(id);
     }
+
     @Test
     void updateFood_withoutImage_returnUpdatedFood() {
         Long id = 1L;
@@ -108,6 +109,7 @@ class FoodControllerTest {
 
         verify(foodService).updateFood(id, dto);
     }
+
     @Test
     void deleteFood_returnNoContent() {
         Long id = 1L;

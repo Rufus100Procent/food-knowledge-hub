@@ -35,8 +35,6 @@ public class FoodController {
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
-
-
     @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<FoodDto> updateFood(
             @PathVariable Long id,

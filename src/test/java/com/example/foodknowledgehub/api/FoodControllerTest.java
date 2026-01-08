@@ -8,7 +8,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mock.web.MockMultipartFile;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
@@ -33,22 +35,23 @@ class FoodControllerTest {
         FoodDto dto  = new FoodDto("Apple");
         FoodDto created  = new FoodDto("Apple");
 
-        when(foodService.createFood(dto)).thenReturn(created);
 
-        ResponseEntity<FoodDto> response = controller.createFood(dto);
+        MockMultipartFile file
+                = new MockMultipartFile(
+                "file",
+                "test.txt",
+                MediaType.IMAGE_PNG_VALUE,
+                "test image!".getBytes()
+        );
+
+        when(foodService.createFood(dto, file)).thenReturn(created);
+        ResponseEntity<FoodDto> response = controller.createFood(dto, file);
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
+        assert response.getBody() != null;
         assertEquals("Apple", response.getBody().getName());
 
-        verify(foodService).createFood(dto);
-    }
-
-    @Test
-    void getFood() {
-    }
-
-    @Test
-    void getAllFoods() {
+        verify(foodService).createFood(dto, file);
     }
 
     @AfterEach

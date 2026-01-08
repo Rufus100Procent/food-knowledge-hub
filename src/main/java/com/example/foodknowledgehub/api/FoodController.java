@@ -4,9 +4,11 @@ import com.example.foodknowledgehub.dto.FoodDto;
 import com.example.foodknowledgehub.service.FoodService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -15,6 +17,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v0/foods")
+@CrossOrigin("*")
 public class FoodController {
 
     private final FoodService foodService;
@@ -23,10 +26,29 @@ public class FoodController {
         this.foodService = foodService;
     }
 
-    @PostMapping
-    public ResponseEntity<FoodDto> createFood( @Valid @RequestBody FoodDto dto) {
-        FoodDto created = foodService.createFood(dto);
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<FoodDto> createFood(
+            @RequestPart("food") @Valid FoodDto dto,
+            @RequestPart(value = "imageFile", required = false) MultipartFile imageFile) {
+
+        FoodDto created = foodService.createFood(dto, imageFile);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
+    }
+
+
+
+    @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<FoodDto> updateFood(
+            @PathVariable Long id,
+            @RequestPart("food") FoodDto dto,
+            @RequestPart(value = "imageFile", required = false) MultipartFile imageFile) {
+
+        if (imageFile != null && !imageFile.isEmpty()) {
+            dto.setImageFile(imageFile);
+        }
+
+        FoodDto updated = foodService.updateFood(id, dto);
+        return ResponseEntity.ok(updated);
     }
 
     @GetMapping("/{id}")
@@ -37,14 +59,7 @@ public class FoodController {
 
     @GetMapping
     public ResponseEntity<List<FoodDto>> getAllFoods() {
-        List<FoodDto> foods = foodService.getAllFoods();
-        return ResponseEntity.ok(foods);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<FoodDto> updateFood(@PathVariable Long id, @RequestBody FoodDto dto) {
-        FoodDto updated = foodService.updateFood(id, dto);
-        return ResponseEntity.ok(updated);
+        return ResponseEntity.ok(foodService.getAllFoods());
     }
 
     @DeleteMapping("/{id}")

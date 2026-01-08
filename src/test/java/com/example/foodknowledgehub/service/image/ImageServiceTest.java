@@ -22,7 +22,7 @@ import static org.mockito.Mockito.*;
 import java.nio.file.Paths;
 
 @ExtendWith(MockitoExtension.class)
-class ImageStorageServiceTest {
+class ImageServiceTest {
 
     @Mock
     private FileSystemOperations fileSystemOperations;
@@ -30,14 +30,14 @@ class ImageStorageServiceTest {
     @Mock
     private MultipartFile mockFile;
 
-    private ImageStorageService imageStorageService;
+    private ImageService imageService;
 
     @BeforeEach
     void setUp() throws IOException {
         // Mock directory creation so no real folders is created
         doNothing().when(fileSystemOperations).createDirectories(any(Path.class));
 
-        imageStorageService = new ImageStorageService(fileSystemOperations);
+        imageService = new ImageService(fileSystemOperations);
     }
 
     @Test
@@ -80,7 +80,7 @@ class ImageStorageServiceTest {
         when(fileSystemOperations.createOutputStream(mockCanonicalFile)).thenReturn(outputStream);
 
         // Act
-        String result = imageStorageService.storeImage(mockFile, itemName, sourceType);
+        String result = imageService.storeImage(mockFile, itemName, sourceType);
 
         // Assert
         assertNotNull(result);
@@ -93,7 +93,7 @@ class ImageStorageServiceTest {
     void testStoreImage_NullFile() {
         // Act & Assert
         IllegalStateException exception = assertThrows(IllegalStateException.class, () -> {
-            imageStorageService.storeImage(null, "item", "micro");
+            imageService.storeImage(null, "item", "micro");
         });
 
         assertEquals("Image file is empty or null", exception.getMessage());
@@ -106,7 +106,7 @@ class ImageStorageServiceTest {
 
         // Act & Assert
         IllegalStateException exception = assertThrows(IllegalStateException.class, () -> {
-            imageStorageService.storeImage(mockFile, "item", "macro");
+            imageService.storeImage(mockFile, "item", "macro");
         });
 
         assertEquals("Image file is empty or null", exception.getMessage());
@@ -120,7 +120,7 @@ class ImageStorageServiceTest {
 
         // Act & Assert
         assertThrows(IllegalStateException.class, () -> {
-            imageStorageService.storeImage(mockFile, "item", "food");
+            imageService.storeImage(mockFile, "item", "food");
         });
     }
 
@@ -133,7 +133,7 @@ class ImageStorageServiceTest {
 
         // Act & Assert
         IllegalStateException exception = assertThrows(IllegalStateException.class, () -> {
-            imageStorageService.storeImage(mockFile, "item", "food");
+            imageService.storeImage(mockFile, "item", "food");
         });
 
         assertEquals("Invalid image format. Only PNG, JPG, JPEG allowed.", exception.getMessage());
@@ -153,7 +153,7 @@ class ImageStorageServiceTest {
 
         IllegalStateException exception =
                 assertThrows(IllegalStateException.class, () ->
-                        imageStorageService.storeImage(mockFile, "item", "food"));
+                        imageService.storeImage(mockFile, "item", "food"));
 
         assertEquals("Invalid image content type", exception.getMessage());
     }
@@ -169,7 +169,7 @@ class ImageStorageServiceTest {
 
         // Act & Assert
         IllegalStateException exception = assertThrows(IllegalStateException.class, () -> {
-            imageStorageService.storeImage(mockFile, null, "food");
+            imageService.storeImage(mockFile, null, "food");
         });
 
         assertEquals("Item name cannot be null or empty", exception.getMessage());
@@ -185,7 +185,7 @@ class ImageStorageServiceTest {
 
         // Act & Assert
         IllegalStateException exception = assertThrows(IllegalStateException.class, () -> {
-            imageStorageService.storeImage(mockFile, "   ", "food");
+            imageService.storeImage(mockFile, "   ", "food");
         });
 
         assertEquals("Item name cannot be null or empty", exception.getMessage());
@@ -235,7 +235,7 @@ class ImageStorageServiceTest {
         when(fileSystemOperations.createOutputStream(mockNewFile)).thenReturn(outputStream);
 
         // Act
-        String result = imageStorageService.storeImage(mockFile, itemName, sourceType);
+        String result = imageService.storeImage(mockFile, itemName, sourceType);
 
         // Assert
         assertNotNull(result);
@@ -297,7 +297,7 @@ class ImageStorageServiceTest {
 
         // Act & Assert
         SecurityException exception = assertThrows(SecurityException.class, () -> {
-            imageStorageService.storeImage(mockFile, itemName, sourceType);
+            imageService.storeImage(mockFile, itemName, sourceType);
         });
 
         assertEquals("Cannot store file outside designated directory", exception.getMessage());
@@ -323,7 +323,7 @@ class ImageStorageServiceTest {
 
         // Act & Assert
         IllegalStateException exception = assertThrows(IllegalStateException.class, () -> {
-            imageStorageService.storeImage(mockFile, itemName, sourceType);
+            imageService.storeImage(mockFile, itemName, sourceType);
         });
 
         assertEquals("Failed to store image file", exception.getMessage());
@@ -367,7 +367,7 @@ class ImageStorageServiceTest {
         when(fileSystemOperations.createOutputStream(mockCanonicalFile)).thenReturn(outputStream);
 
         // Act
-        String result = imageStorageService.storeImage(mockFile, itemName, sourceType);
+        String result = imageService.storeImage(mockFile, itemName, sourceType);
 
         // Assert
         assertNotNull(result);
@@ -408,7 +408,7 @@ class ImageStorageServiceTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         when(fileSystemOperations.createOutputStream(mockCanonicalFile)).thenReturn(outputStream);
 
-        String result = imageStorageService.storeImage(mockFile, "test", sourceType);
+        String result = imageService.storeImage(mockFile, "test", sourceType);
 
         assertNotNull(result);
         assertTrue(result.contains(expectedPathPart));

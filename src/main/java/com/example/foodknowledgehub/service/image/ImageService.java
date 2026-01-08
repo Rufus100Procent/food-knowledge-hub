@@ -11,7 +11,7 @@ import java.nio.file.Paths;
 import java.util.Set;
 
 @Service
-public class ImageStorageService {
+public class ImageService {
 
     private static final Set<String> ALLOWED_IMAGE_FILE_EXTENSIONS = Set.of("png", "jpg", "jpeg");
 
@@ -23,7 +23,7 @@ public class ImageStorageService {
     private final FileSystemOperations fileSystemOperations;
 
     @Autowired
-    public ImageStorageService(FileSystemOperations fileSystemOperations) {
+    public ImageService(FileSystemOperations fileSystemOperations) {
         this.fileSystemOperations = fileSystemOperations;
         this.defaultLocation = Paths.get("./src/main/resources/images");
         this.foodLocation = Paths.get("./src/main/resources/images/foods");

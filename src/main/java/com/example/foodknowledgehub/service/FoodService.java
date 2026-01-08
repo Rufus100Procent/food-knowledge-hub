@@ -3,7 +3,7 @@ package com.example.foodknowledgehub.service;
 import com.example.foodknowledgehub.dto.*;
 import com.example.foodknowledgehub.modal.*;
 import com.example.foodknowledgehub.repo.FoodRepository;
-import com.example.foodknowledgehub.service.image.ImageStorageService;
+import com.example.foodknowledgehub.service.image.ImageService;
 import com.example.foodknowledgehub.service.mapper.FoodMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,14 +21,14 @@ public class FoodService {
 
     private final FoodRepository foodRepository;
     private final FoodMapper foodMapper;
-    private final ImageStorageService imageStorageService;
+    private final ImageService imageService;
 
     public FoodService(FoodRepository foodRepository,
                        FoodMapper foodMapper,
-                       ImageStorageService imageStorageService) {
+                       ImageService imageService) {
         this.foodRepository = foodRepository;
         this.foodMapper = foodMapper;
-        this.imageStorageService = imageStorageService;
+        this.imageService = imageService;
     }
 
     public FoodDto createFood(FoodDto dto, MultipartFile imageFile) {
@@ -39,7 +39,7 @@ public class FoodService {
 
         String food1 = "food";
         if (dto.getImageFile() != null && !dto.getImageFile().isEmpty()) {
-            String imagePath = imageStorageService.storeImage(dto.getImageFile(),
+            String imagePath = imageService.storeImage(dto.getImageFile(),
                     dto.getName(), food1);
             dto.setImageUrl(imagePath);
         }
@@ -55,7 +55,7 @@ public class FoodService {
 
         String food = "food";
         if (dto.getImageFile() != null && !dto.getImageFile().isEmpty()) {
-            String imagePath = imageStorageService.storeImage(dto.getImageFile(), dto.getName(), food);
+            String imagePath = imageService.storeImage(dto.getImageFile(), dto.getName(), food);
             dto.setImageUrl(imagePath);
         }
 

@@ -3,12 +3,13 @@ package com.example.foodknowledgehub.dto;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 public class FoodDto {
-    public FoodDto() {
-    }
+
+    private long id;
 
     @NotBlank(message = "Food name cannot be blank.")
     @Size(min = 1, max = 90 , message = "Food name must be between 1 and 100 characters.")
@@ -46,8 +47,27 @@ public class FoodDto {
         this.name = name;
     }
 
+    public FoodDto() {
+    }
+    private transient MultipartFile imageFile;
+
+    public MultipartFile getImageFile() {
+        return imageFile;
+    }
+
+    public void setImageFile(MultipartFile imageFile) {
+        this.imageFile = imageFile;
+    }
 
     //<editor-fold desc="Getters and Setters">
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

@@ -27,6 +27,7 @@ public class FoodMapper {
     public FoodDto toDto(Food food) {
         FoodDto dto = new FoodDto();
 
+        dto.setId(food.getId());
         dto.setName(food.getName());
         dto.setImageUrl(food.getImageUrl());
         dto.setOverview(food.getOverview());

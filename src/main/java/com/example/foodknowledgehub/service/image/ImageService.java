@@ -6,8 +6,10 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Base64;
 import java.util.Set;
 
 @Service
@@ -160,6 +162,32 @@ public class ImageService {
         String contentType = file.getContentType();
         if (contentType == null || !contentType.startsWith("image/")) {
             throw new IllegalStateException("Invalid image content type");
+        }
+    }
+
+    public String getImageAsDataUri(String imagePath) {
+        if (imagePath == null || imagePath.isBlank()) {
+            return null;
+        }
+
+        try {
+            Path path = Paths.get(imagePath);
+            if (!Files.exists(path)) {
+                return null;
+            }
+
+            byte[] bytes = Files.readAllBytes(path);
+            String base64 = Base64.getEncoder().encodeToString(bytes);
+
+            String contentType = Files.probeContentType(path);
+            if (contentType == null) {
+                contentType = "image/png";
+            }
+
+            return "data:" + contentType + ";base64," + base64;
+
+        } catch (IOException e) {
+            throw new IllegalStateException("Failed to read image from path: " + imagePath, e);
         }
     }
 

@@ -14,12 +14,14 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 import java.nio.file.Paths;
+import java.util.Base64;
 
 @ExtendWith(MockitoExtension.class)
 class ImageServiceTest {
@@ -413,4 +415,66 @@ class ImageServiceTest {
         assertNotNull(result);
         assertTrue(result.contains(expectedPathPart));
     }
+    @Test
+    void testGetImageAsDataUri_NullPath() {
+        String result = imageService.getImageAsDataUri(null);
+        assertNull(result);
+    }
+
+    @Test
+    void testGetImageAsDataUri_BlankPath() {
+        String result = imageService.getImageAsDataUri("   ");
+        assertNull(result);
+    }
+    @Test
+    void testGetImageAsDataUri_FileDoesNotExist() {
+        String result = imageService.getImageAsDataUri("/does/not/exist.png");
+        assertNull(result);
+    }
+
+    @Test
+    void testGetImageAsDataUri_Success() throws IOException {
+        Path tempDir = Files.createTempDirectory("image-test");
+        Path imageFile = tempDir.resolve("test.png");
+
+        byte[] imageBytes = new byte[] { 1, 2, 3, 4, 5 };
+        Files.write(imageFile, imageBytes);
+
+        String result = imageService.getImageAsDataUri(imageFile.toString());
+
+        assertNotNull(result);
+        assertTrue(result.startsWith("data:image/"));
+        assertTrue(result.contains(";base64,"));
+
+        String base64Part = result.substring(result.indexOf(",") + 1);
+        byte[] decoded = Base64.getDecoder().decode(base64Part);
+
+        assertArrayEquals(imageBytes, decoded);
+    }
+
+    @Test
+    void testGetImageAsDataUri_UnknownContentTypeDefaultsToPng() throws IOException {
+        Path tempDir = Files.createTempDirectory("image-test");
+        Path imageFile = tempDir.resolve("test.unknown");
+
+        byte[] imageBytes = new byte[] { 9, 8, 7 };
+        Files.write(imageFile, imageBytes);
+
+        String result = imageService.getImageAsDataUri(imageFile.toString());
+
+        assertNotNull(result);
+        assertTrue(result.startsWith("data:image/png;base64,"));
+    }
+
+    @Test
+    void testGetImageAsDataUri_ReadFailureThrowsException() throws IOException {
+        Path tempDir = Files.createTempDirectory("image-test");
+
+        IllegalStateException exception =
+                assertThrows(IllegalStateException.class, () ->
+                        imageService.getImageAsDataUri(tempDir.toString()));
+
+        assertTrue(exception.getMessage().contains("Failed to read image from path"));
+    }
+
 }

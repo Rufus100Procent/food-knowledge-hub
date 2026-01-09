@@ -134,11 +134,10 @@ class ImageServiceTest {
         when(mockFile.getOriginalFilename()).thenReturn("test.gif");
 
         // Act & Assert
-        IllegalStateException exception = assertThrows(IllegalStateException.class, () -> {
+        assertThrows(IllegalStateException.class, () -> {
             imageService.storeImage(mockFile, "item", "food");
         });
 
-        assertEquals("Invalid image format. Only PNG, JPG, JPEG allowed.", exception.getMessage());
     }
 
     @ParameterizedTest

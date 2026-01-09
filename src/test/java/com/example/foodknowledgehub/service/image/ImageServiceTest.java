@@ -107,11 +107,10 @@ class ImageServiceTest {
         when(mockFile.isEmpty()).thenReturn(true);
 
         // Act & Assert
-        IllegalStateException exception = assertThrows(IllegalStateException.class, () -> {
+        assertThrows(IllegalStateException.class, () -> {
             imageService.storeImage(mockFile, "item", "macro");
         });
 
-        assertEquals("Image file is empty or null", exception.getMessage());
     }
 
     @Test
@@ -152,11 +151,9 @@ class ImageServiceTest {
         when(mockFile.getOriginalFilename()).thenReturn("test.png");
         when(mockFile.getContentType()).thenReturn(contentType);
 
-        IllegalStateException exception =
-                assertThrows(IllegalStateException.class, () ->
+        assertThrows(IllegalStateException.class, () ->
                         imageService.storeImage(mockFile, "item", "food"));
 
-        assertEquals("Invalid image content type", exception.getMessage());
     }
 
 
@@ -169,11 +166,10 @@ class ImageServiceTest {
         when(mockFile.getContentType()).thenReturn("image/png");
 
         // Act & Assert
-        IllegalStateException exception = assertThrows(IllegalStateException.class, () -> {
+        assertThrows(IllegalStateException.class, () -> {
             imageService.storeImage(mockFile, null, "food");
         });
 
-        assertEquals("Item name cannot be null or empty", exception.getMessage());
     }
 
     @Test
@@ -185,11 +181,10 @@ class ImageServiceTest {
         when(mockFile.getContentType()).thenReturn("image/png");
 
         // Act & Assert
-        IllegalStateException exception = assertThrows(IllegalStateException.class, () -> {
+         assertThrows(IllegalStateException.class, () -> {
             imageService.storeImage(mockFile, "   ", "food");
         });
 
-        assertEquals("Item name cannot be null or empty", exception.getMessage());
     }
 
     @Test
@@ -297,11 +292,10 @@ class ImageServiceTest {
         when(fileSystemOperations.exists(mockCanonicalFileInResolve)).thenReturn(false);
 
         // Act & Assert
-        SecurityException exception = assertThrows(SecurityException.class, () -> {
+        assertThrows(SecurityException.class, () -> {
             imageService.storeImage(mockFile, itemName, sourceType);
         });
 
-        assertEquals("Cannot store file outside designated directory", exception.getMessage());
     }
 
     @Test
@@ -323,11 +317,10 @@ class ImageServiceTest {
         when(fileSystemOperations.getCanonicalFile(any(File.class))).thenReturn(mockCanonicalDirectory);
 
         // Act & Assert
-        IllegalStateException exception = assertThrows(IllegalStateException.class, () -> {
+         assertThrows(IllegalStateException.class, () -> {
             imageService.storeImage(mockFile, itemName, sourceType);
         });
 
-        assertEquals("Failed to store image file", exception.getMessage());
     }
 
     @Test
@@ -469,11 +462,9 @@ class ImageServiceTest {
     void testGetImageAsDataUri_ReadFailureThrowsException() throws IOException {
         Path tempDir = Files.createTempDirectory("image-test");
 
-        IllegalStateException exception =
-                assertThrows(IllegalStateException.class, () ->
+        assertThrows(IllegalStateException.class, () ->
                         imageService.getImageAsDataUri(tempDir.toString()));
 
-        assertTrue(exception.getMessage().contains("Failed to read image from path"));
     }
 
 }

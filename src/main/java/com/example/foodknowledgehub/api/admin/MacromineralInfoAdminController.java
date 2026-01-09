@@ -16,6 +16,7 @@ public class MacromineralInfoAdminController {
         this.service = service;
     }
 
+    // Bulk upsert  data + image url as a string instead of uploading actual image
     @PostMapping("/bulk")
     public List<MacromineralInfoDto> bulkUpsert(@RequestBody List<MacromineralInfoDto> body) {
         return service.bulkUpsert(body);

@@ -4,15 +4,12 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mock;
+import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,14 +17,10 @@ import java.nio.file.Path;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-import java.nio.file.Paths;
-import java.util.Base64;
+
 
 @ExtendWith(MockitoExtension.class)
 class ImageServiceTest {
-
-    @Mock
-    private FileSystemOperations fileSystemOperations;
 
     @Mock
     private MultipartFile mockFile;
@@ -35,436 +28,428 @@ class ImageServiceTest {
     private ImageService imageService;
 
     @BeforeEach
-    void setUp() throws IOException {
-        // Mock directory creation so no real folders is created
-        doNothing().when(fileSystemOperations).createDirectories(any(Path.class));
-
-        imageService = new ImageService(fileSystemOperations);
+    void setUp() {
+        // Mock the Files.createDirectories to prevent real directory creation
+        try (MockedStatic<Files> mockedFiles = mockStatic(Files.class)) {
+            mockedFiles.when(() -> Files.createDirectories(any(Path.class)))
+                    .thenReturn(null);
+            imageService = new ImageService();
+        }
     }
 
     @Test
     void testStoreImage_Success() throws IOException {
-        // Arrange
-        String itemName = "test-item";
-        String sourceType = "food";
-        byte[] fileContent = "fake image content".getBytes();
+        try (MockedStatic<Files> mockedFiles = mockStatic(Files.class)) {
+            // Setup mocks
+            String sourceType = "food";
+            byte[] fileContent = "fake image content".getBytes();
 
-        when(mockFile.isEmpty()).thenReturn(false);
-        when(mockFile.getSize()).thenReturn(1024L);
-        when(mockFile.getOriginalFilename()).thenReturn("test.png");
-        when(mockFile.getContentType()).thenReturn("image/png");
-        when(mockFile.getInputStream()).thenReturn(new ByteArrayInputStream(fileContent));
+            when(mockFile.isEmpty()).thenReturn(false);
+            when(mockFile.getSize()).thenReturn(1024L);
+            when(mockFile.getOriginalFilename()).thenReturn("test.png");
+            when(mockFile.getContentType()).thenReturn("image/png");
+            when(mockFile.getInputStream()).thenReturn(new ByteArrayInputStream(fileContent));
 
-        // Mock the directory and file objects
-        File mockCanonicalDirectory = mock(File.class);
-        File mockCanonicalFile = mock(File.class);
+            // Mock Files.newOutputStream
+            mockedFiles.when(() -> Files.newOutputStream(any(), any(), any()))
+                    .thenReturn(new java.io.ByteArrayOutputStream());
 
-        when(mockCanonicalDirectory.getPath()).thenReturn("/fake/path/foods");
-        when(mockCanonicalDirectory.toPath()).thenReturn(Paths.get("/fake/path/foods"));
-        when(mockCanonicalFile.getPath()).thenReturn("/fake/path/foods/test-item.png");
-        when(mockCanonicalFile.getAbsolutePath()).thenReturn("/fake/path/foods/test-item.png");
+            // Act
+            String result = imageService.storeImage(mockFile, sourceType);
 
-        // Setup mock behavior for getCanonicalFile calls
-        when(fileSystemOperations.getCanonicalFile(any(File.class)))
-                .thenAnswer(call -> {
-                    File file = call.getArgument(0);
-                    String path = file.getPath();
-                    if (path.contains("foods") && !path.contains(".png")) {
-                        return mockCanonicalDirectory;
-                    } else {
-                        return mockCanonicalFile;
-                    }
-                });
-
-        when(fileSystemOperations.exists(mockCanonicalFile)).thenReturn(false);
-
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        when(fileSystemOperations.createOutputStream(mockCanonicalFile)).thenReturn(outputStream);
-
-        // Act
-        String result = imageService.storeImage(mockFile, itemName, sourceType);
-
-        // Assert
-        assertNotNull(result);
-        assertEquals("/fake/path/foods/test-item.png", result);
-        assertArrayEquals(fileContent, outputStream.toByteArray());
-        verify(fileSystemOperations).createOutputStream(mockCanonicalFile);
+            // Assert
+            assertNotNull(result);
+            assertTrue(result.startsWith("food-"));
+            assertTrue(result.endsWith(".png"));
+        }
     }
 
     @Test
     void testStoreImage_NullFile() {
-        // Act & Assert
-        IllegalStateException exception = assertThrows(IllegalStateException.class, () -> {
-            imageService.storeImage(null, "item", "micro");
-        });
+        try (MockedStatic<Files> mockedFiles = mockStatic(Files.class)) {
+            mockedFiles.when(() -> Files.createDirectories(any(Path.class)))
+                    .thenReturn(null);
 
-        assertEquals("Image file is empty or null", exception.getMessage());
+            IllegalStateException exception = assertThrows(IllegalStateException.class, () -> imageService.storeImage(null, "food"));
+
+            assertEquals("File is empty", exception.getMessage());
+        }
     }
 
     @Test
     void testStoreImage_EmptyFile() {
-        // Arrange
-        when(mockFile.isEmpty()).thenReturn(true);
+        try (MockedStatic<Files> mockedFiles = mockStatic(Files.class)) {
+            mockedFiles.when(() -> Files.createDirectories(any(Path.class)))
+                    .thenReturn(null);
 
-        // Act & Assert
-        assertThrows(IllegalStateException.class, () -> {
-            imageService.storeImage(mockFile, "item", "macro");
-        });
+            when(mockFile.isEmpty()).thenReturn(true);
 
+            assertThrows(IllegalStateException.class, () -> imageService.storeImage(mockFile, "food"));
+        }
     }
 
     @Test
     void testStoreImage_FileSizeExceedsLimit() {
-        // Arrange
-        when(mockFile.isEmpty()).thenReturn(false);
-        when(mockFile.getSize()).thenReturn(6L * 1024 * 1024); // 6 MB
+        try (MockedStatic<Files> mockedFiles = mockStatic(Files.class)) {
+            mockedFiles.when(() -> Files.createDirectories(any(Path.class)))
+                    .thenReturn(null);
 
-        // Act & Assert
-        assertThrows(IllegalStateException.class, () -> {
-            imageService.storeImage(mockFile, "item", "food");
-        });
+            when(mockFile.isEmpty()).thenReturn(false);
+            when(mockFile.getSize()).thenReturn(6L * 1024 * 1024);
+
+            assertThrows(IllegalStateException.class, () -> imageService.storeImage(mockFile, "food"));
+        }
     }
 
     @Test
     void testStoreImage_InvalidExtension() {
-        // Arrange
-        when(mockFile.isEmpty()).thenReturn(false);
-        when(mockFile.getSize()).thenReturn(1024L);
-        when(mockFile.getOriginalFilename()).thenReturn("test.gif");
+        try (MockedStatic<Files> mockedFiles = mockStatic(Files.class)) {
+            mockedFiles.when(() -> Files.createDirectories(any(Path.class)))
+                    .thenReturn(null);
 
-        // Act & Assert
-        assertThrows(IllegalStateException.class, () -> {
-            imageService.storeImage(mockFile, "item", "food");
-        });
+            when(mockFile.isEmpty()).thenReturn(false);
+            when(mockFile.getSize()).thenReturn(1024L);
+            when(mockFile.getOriginalFilename()).thenReturn("test.gif");
 
-    }
-
-    @ParameterizedTest
-    @ValueSource    (strings = {
-            "application/pdf",
-            "text/plain",
-            "application/octet-stream"
-    })
-    void testStoreImage_InvalidContentType(String contentType) {
-        when(mockFile.isEmpty()).thenReturn(false);
-        when(mockFile.getSize()).thenReturn(1024L);
-        when(mockFile.getOriginalFilename()).thenReturn("test.png");
-        when(mockFile.getContentType()).thenReturn(contentType);
-
-        assertThrows(IllegalStateException.class, () ->
-                        imageService.storeImage(mockFile, "item", "food"));
-
-    }
-
-
-    @Test
-    void testStoreImage_NullItemName() {
-        // Arrange
-        when(mockFile.isEmpty()).thenReturn(false);
-        when(mockFile.getSize()).thenReturn(1024L);
-        when(mockFile.getOriginalFilename()).thenReturn("test.png");
-        when(mockFile.getContentType()).thenReturn("image/png");
-
-        // Act & Assert
-        assertThrows(IllegalStateException.class, () -> {
-            imageService.storeImage(mockFile, null, "food");
-        });
-
+            assertThrows(IllegalStateException.class, () -> imageService.storeImage(mockFile, "food"));
+        }
     }
 
     @Test
-    void testStoreImage_EmptyItemName() {
-        // Arrange
-        when(mockFile.isEmpty()).thenReturn(false);
-        when(mockFile.getSize()).thenReturn(1024L);
-        when(mockFile.getOriginalFilename()).thenReturn("test.png");
-        when(mockFile.getContentType()).thenReturn("image/png");
+    void testStoreImage_InvalidContentType_PDF() {
+        try (MockedStatic<Files> mockedFiles = mockStatic(Files.class)) {
+            mockedFiles.when(() -> Files.createDirectories(any(Path.class)))
+                    .thenReturn(null);
 
-        // Act & Assert
-         assertThrows(IllegalStateException.class, () -> {
-            imageService.storeImage(mockFile, "   ", "food");
-        });
+            when(mockFile.isEmpty()).thenReturn(false);
+            when(mockFile.getSize()).thenReturn(1024L);
+            when(mockFile.getOriginalFilename()).thenReturn("test.png");
+            when(mockFile.getContentType()).thenReturn("application/pdf");
 
+            assertThrows(IllegalStateException.class, () ->
+                    imageService.storeImage(mockFile, "food"));
+        }
     }
 
     @Test
-    void testStoreImage_DuplicateFilename() throws IOException {
-        // Arrange
-        String itemName = "duplicate";
-        String sourceType = "vitamin";
-        byte[] fileContent = "content".getBytes();
+    void testStoreImage_InvalidContentType_PlainText() {
+        try (MockedStatic<Files> mockedFiles = mockStatic(Files.class)) {
+            mockedFiles.when(() -> Files.createDirectories(any(Path.class)))
+                    .thenReturn(null);
 
-        when(mockFile.isEmpty()).thenReturn(false);
-        when(mockFile.getSize()).thenReturn(1024L);
-        when(mockFile.getOriginalFilename()).thenReturn("test.jpg");
-        when(mockFile.getContentType()).thenReturn("image/jpeg");
-        when(mockFile.getInputStream()).thenReturn(new ByteArrayInputStream(fileContent));
+            when(mockFile.isEmpty()).thenReturn(false);
+            when(mockFile.getSize()).thenReturn(1024L);
+            when(mockFile.getOriginalFilename()).thenReturn("test.png");
+            when(mockFile.getContentType()).thenReturn("text/plain");
 
-        File mockCanonicalDirectory = mock(File.class);
-        File mockExistingFile = mock(File.class);
-        File mockNewFile = mock(File.class);
+            assertThrows(IllegalStateException.class, () ->
+                    imageService.storeImage(mockFile, "food"));
+        }
+    }
 
-        when(mockCanonicalDirectory.getPath()).thenReturn("/fake/path/vitamins");
-        when(mockCanonicalDirectory.toPath()).thenReturn(Paths.get("/fake/path/vitamins"));
-        when(mockExistingFile.getPath()).thenReturn("/fake/path/vitamins/duplicate.jpg");
-        when(mockNewFile.getPath()).thenReturn("/fake/path/vitamins/duplicate1.jpg");
-        when(mockNewFile.getAbsolutePath()).thenReturn("/fake/path/vitamins/duplicate1.jpg");
+    @Test
+    void testStoreImage_NullSourceType() {
+        try (MockedStatic<Files> mockedFiles = mockStatic(Files.class)) {
+            mockedFiles.when(() -> Files.createDirectories(any(Path.class)))
+                    .thenReturn(null);
 
-        // Mock getCanonicalFile to return appropriate files
-        when(fileSystemOperations.getCanonicalFile(any(File.class)))
-                .thenAnswer(call -> {
-                    File file = call.getArgument(0);
-                    String path = file.getPath();
-                    if (path.contains("vitamins") && !path.contains(".jpg")) {
-                        return mockCanonicalDirectory;
-                    } else if (path.contains("duplicate1")) {
-                        return mockNewFile;
-                    } else {
-                        return mockExistingFile;
-                    }
-                });
+            when(mockFile.isEmpty()).thenReturn(false);
+            when(mockFile.getSize()).thenReturn(1024L);
+            when(mockFile.getOriginalFilename()).thenReturn("test.png");
+            when(mockFile.getContentType()).thenReturn("image/png");
 
-        when(fileSystemOperations.exists(mockExistingFile)).thenReturn(true);
-        when(fileSystemOperations.exists(mockNewFile)).thenReturn(false);
+            assertThrows(IllegalStateException.class, () -> imageService.storeImage(mockFile, null));
+        }
+    }
 
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        when(fileSystemOperations.createOutputStream(mockNewFile)).thenReturn(outputStream);
+    @Test
+    void testStoreImage_UnknownSourceType() {
+        try (MockedStatic<Files> mockedFiles = mockStatic(Files.class)) {
+            mockedFiles.when(() -> Files.createDirectories(any(Path.class)))
+                    .thenReturn(null);
 
-        // Act
-        String result = imageService.storeImage(mockFile, itemName, sourceType);
+            when(mockFile.isEmpty()).thenReturn(false);
+            when(mockFile.getSize()).thenReturn(1024L);
+            when(mockFile.getOriginalFilename()).thenReturn("test.png");
+            when(mockFile.getContentType()).thenReturn("image/png");
 
-        // Assert
-        assertNotNull(result);
-        assertTrue(result.contains("duplicate1.jpg"));
+            assertThrows(IllegalStateException.class, () -> imageService.storeImage(mockFile, "unknown"));
+        }
+    }
+
+    @Test
+    void testStoreImage_MissingFileExtension() {
+        try (MockedStatic<Files> mockedFiles = mockStatic(Files.class)) {
+            mockedFiles.when(() -> Files.createDirectories(any(Path.class)))
+                    .thenReturn(null);
+
+            when(mockFile.isEmpty()).thenReturn(false);
+            when(mockFile.getSize()).thenReturn(1024L);
+            when(mockFile.getOriginalFilename()).thenReturn("testfile");
+
+            assertThrows(IllegalStateException.class, () -> imageService.storeImage(mockFile, "food"));
+        }
+    }
+
+    @Test
+    void testStoreImage_FoodLocation() throws IOException {
+        try (MockedStatic<Files> mockedFiles = mockStatic(Files.class)) {
+            byte[] fileContent = "content".getBytes();
+            when(mockFile.isEmpty()).thenReturn(false);
+            when(mockFile.getSize()).thenReturn(1024L);
+            when(mockFile.getOriginalFilename()).thenReturn("test.jpg");
+            when(mockFile.getContentType()).thenReturn("image/jpeg");
+            when(mockFile.getInputStream()).thenReturn(new ByteArrayInputStream(fileContent));
+
+            mockedFiles.when(() -> Files.newOutputStream(any(), any(), any()))
+                    .thenReturn(new java.io.ByteArrayOutputStream());
+
+            String result = imageService.storeImage(mockFile, "food");
+
+            assertNotNull(result);
+            assertTrue(result.startsWith("food-"));
+            assertTrue(result.endsWith(".jpg"));
+        }
     }
 
     @Test
     void testStoreImage_VitaminLocation() throws IOException {
-        testLocationMapping("vitamin", "vitamins");
+        try (MockedStatic<Files> mockedFiles = mockStatic(Files.class)) {
+            byte[] fileContent = "content".getBytes();
+            when(mockFile.isEmpty()).thenReturn(false);
+            when(mockFile.getSize()).thenReturn(1024L);
+            when(mockFile.getOriginalFilename()).thenReturn("test.png");
+            when(mockFile.getContentType()).thenReturn("image/png");
+            when(mockFile.getInputStream()).thenReturn(new ByteArrayInputStream(fileContent));
+
+            mockedFiles.when(() -> Files.newOutputStream(any(), any(), any()))
+                    .thenReturn(new java.io.ByteArrayOutputStream());
+
+            String result = imageService.storeImage(mockFile, "vitamin");
+
+            assertNotNull(result);
+            assertTrue(result.startsWith("vitamin-"));
+            assertTrue(result.endsWith(".png"));
+        }
     }
 
     @Test
-    void testStoreImage_MicroMineralLocation() throws IOException {
-        testLocationMapping("micro", "micro");
+    void testStoreImage_MicroLocation() throws IOException {
+        try (MockedStatic<Files> mockedFiles = mockStatic(Files.class)) {
+            byte[] fileContent = "content".getBytes();
+            when(mockFile.isEmpty()).thenReturn(false);
+            when(mockFile.getSize()).thenReturn(1024L);
+            when(mockFile.getOriginalFilename()).thenReturn("test.jpeg");
+            when(mockFile.getContentType()).thenReturn("image/jpeg");
+            when(mockFile.getInputStream()).thenReturn(new ByteArrayInputStream(fileContent));
+
+            mockedFiles.when(() -> Files.newOutputStream(any(), any(), any()))
+                    .thenReturn(new java.io.ByteArrayOutputStream());
+
+            String result = imageService.storeImage(mockFile, "micro");
+
+            assertNotNull(result);
+            assertTrue(result.startsWith("micro-"));
+            assertTrue(result.endsWith(".jpeg"));
+        }
     }
 
     @Test
-    void testStoreImage_MacroMineralLocation() throws IOException {
-        testLocationMapping("macro", "macro");
+    void testStoreImage_MacroLocation() throws IOException {
+        try (MockedStatic<Files> mockedFiles = mockStatic(Files.class)) {
+            byte[] fileContent = "content".getBytes();
+            when(mockFile.isEmpty()).thenReturn(false);
+            when(mockFile.getSize()).thenReturn(1024L);
+            when(mockFile.getOriginalFilename()).thenReturn("test.png");
+            when(mockFile.getContentType()).thenReturn("image/png");
+            when(mockFile.getInputStream()).thenReturn(new ByteArrayInputStream(fileContent));
+
+            mockedFiles.when(() -> Files.newOutputStream(any(), any(), any()))
+                    .thenReturn(new java.io.ByteArrayOutputStream());
+
+            String result = imageService.storeImage(mockFile, "macro");
+
+            assertNotNull(result);
+            assertTrue(result.startsWith("macro-"));
+            assertTrue(result.endsWith(".png"));
+        }
     }
 
     @Test
-    void testStoreImage_DefaultLocation() throws IOException {
-        testLocationMapping("unknown", "images");
+    void testLoadImageAsResource_InvalidFilename() {
+        try (MockedStatic<Files> mockedFiles = mockStatic(Files.class)) {
+            mockedFiles.when(() -> Files.createDirectories(any(Path.class)))
+                    .thenReturn(null);
+
+            assertThrows(IllegalStateException.class, () -> imageService.loadImageAsResource("invalid_no_dash.png"));
+        }
     }
 
     @Test
-    void testStoreImage_SecurityViolation() throws IOException {
-        // Arrange
-        String itemName = "test";
-        String sourceType = "food";
+    void testLoadImageAsResource_NullFilename() {
+        try (MockedStatic<Files> mockedFiles = mockStatic(Files.class)) {
+            mockedFiles.when(() -> Files.createDirectories(any(Path.class)))
+                    .thenReturn(null);
 
-        when(mockFile.isEmpty()).thenReturn(false);
-        when(mockFile.getSize()).thenReturn(1024L);
-        when(mockFile.getOriginalFilename()).thenReturn("test.png");
-        when(mockFile.getContentType()).thenReturn("image/png");
-
-        File mockCanonicalDirectory = mock(File.class);
-        File mockCanonicalFileInResolve = mock(File.class);
-        File mockCanonicalFileInStore = mock(File.class);
-
-        when(mockCanonicalDirectory.getPath()).thenReturn("/fake/path/foods");
-        when(mockCanonicalDirectory.toPath()).thenReturn(Paths.get("/fake/path/foods"));
-
-        // First canonical file check in resolveUniqueFilename - should pass validation
-        when(mockCanonicalFileInResolve.getPath()).thenReturn("/fake/path/foods/test.png");
-
-        // Second canonical file check in storeImage - should fail validation
-        when(mockCanonicalFileInStore.getPath()).thenReturn("/different/path/test.png");
-
-        // Mock getCanonicalFile to return different files for different calls
-        when(fileSystemOperations.getCanonicalFile(any(File.class)))
-                .thenReturn(mockCanonicalDirectory)           // First call: directory in storeImage
-                .thenReturn(mockCanonicalFileInResolve)       // Second call: file in resolveUniqueFilename
-                .thenReturn(mockCanonicalDirectory)           // Third call: directory in resolveUniqueFilename
-                .thenReturn(mockCanonicalFileInStore);        // Fourth call: file in storeImage for final validation
-
-        when(fileSystemOperations.exists(mockCanonicalFileInResolve)).thenReturn(false);
-
-        // Act & Assert
-        assertThrows(SecurityException.class, () -> {
-            imageService.storeImage(mockFile, itemName, sourceType);
-        });
-
+            assertThrows(IllegalStateException.class, () -> imageService.loadImageAsResource(null));
+        }
     }
 
     @Test
-    void testStoreImage_IoExceptionDuringStore() throws IOException {
-        // Arrange
-        String itemName = "test";
-        String sourceType = "food";
+    void testLoadImageAsResource_PathTraversalAttempt() {
+        try (MockedStatic<Files> mockedFiles = mockStatic(Files.class)) {
+            mockedFiles.when(() -> Files.createDirectories(any(Path.class)))
+                    .thenReturn(null);
 
-        when(mockFile.isEmpty()).thenReturn(false);
-        when(mockFile.getSize()).thenReturn(1024L);
-        when(mockFile.getOriginalFilename()).thenReturn("test.png");
-        when(mockFile.getContentType()).thenReturn("image/png");
-        when(mockFile.getInputStream()).thenThrow(new IOException("Read error"));
-
-        File mockCanonicalDirectory = mock(File.class);
-        when(mockCanonicalDirectory.getPath()).thenReturn("/fake/path/foods");
-        when(mockCanonicalDirectory.toPath()).thenReturn(Paths.get("/fake/path/foods"));
-
-        when(fileSystemOperations.getCanonicalFile(any(File.class))).thenReturn(mockCanonicalDirectory);
-
-        // Act & Assert
-         assertThrows(IllegalStateException.class, () -> {
-            imageService.storeImage(mockFile, itemName, sourceType);
-        });
-
+            assertThrows(IllegalStateException.class, () -> imageService.loadImageAsResource("../../../etc/passwd"));
+        }
     }
 
     @Test
-    void testStoreImage_SpecialCharactersInItemName() throws IOException {
-        // Arrange
-        String itemName = "test@#$%item!";
-        String sourceType = "food";
-        byte[] fileContent = "content".getBytes();
+    void testDeleteImage_InvalidFilename() {
+        try (MockedStatic<Files> mockedFiles = mockStatic(Files.class)) {
+            mockedFiles.when(() -> Files.createDirectories(any(Path.class)))
+                    .thenReturn(null);
 
-        when(mockFile.isEmpty()).thenReturn(false);
-        when(mockFile.getSize()).thenReturn(1024L);
-        when(mockFile.getOriginalFilename()).thenReturn("test.png");
-        when(mockFile.getContentType()).thenReturn("image/png");
-        when(mockFile.getInputStream()).thenReturn(new ByteArrayInputStream(fileContent));
-
-        File mockCanonicalDirectory = mock(File.class);
-        File mockCanonicalFile = mock(File.class);
-
-        when(mockCanonicalDirectory.getPath()).thenReturn("/fake/path/foods");
-        when(mockCanonicalDirectory.toPath()).thenReturn(Paths.get("/fake/path/foods"));
-        when(mockCanonicalFile.getPath()).thenReturn("/fake/path/foods/test_____item_.png");
-        when(mockCanonicalFile.getAbsolutePath()).thenReturn("/fake/path/foods/test_____item_.png");
-
-        when(fileSystemOperations.getCanonicalFile(any(File.class)))
-                .thenAnswer(invocation -> {
-                    File file = invocation.getArgument(0);
-                    String path = file.getPath();
-                    if (path.contains("foods") && !path.contains(".png")) {
-                        return mockCanonicalDirectory;
-                    } else {
-                        return mockCanonicalFile;
-                    }
-                });
-
-        when(fileSystemOperations.exists(mockCanonicalFile)).thenReturn(false);
-
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        when(fileSystemOperations.createOutputStream(mockCanonicalFile)).thenReturn(outputStream);
-
-        // Act
-        String result = imageService.storeImage(mockFile, itemName, sourceType);
-
-        // Assert
-        assertNotNull(result);
-        assertTrue(result.contains("test_____item_"));
-    }
-
-    private void testLocationMapping(String sourceType, String expectedPathPart) throws IOException {
-        byte[] fileContent = "content".getBytes();
-
-        when(mockFile.isEmpty()).thenReturn(false);
-        when(mockFile.getSize()).thenReturn(1024L);
-        when(mockFile.getOriginalFilename()).thenReturn("test.png");
-        when(mockFile.getContentType()).thenReturn("image/png");
-        when(mockFile.getInputStream()).thenReturn(new ByteArrayInputStream(fileContent));
-
-        File mockCanonicalDirectory = mock(File.class);
-        File mockCanonicalFile = mock(File.class);
-
-        String expectedPath = "/fake/path/" + expectedPathPart;
-        when(mockCanonicalDirectory.getPath()).thenReturn(expectedPath);
-        when(mockCanonicalDirectory.toPath()).thenReturn(Paths.get(expectedPath));
-        when(mockCanonicalFile.getPath()).thenReturn(expectedPath + "/test.png");
-        when(mockCanonicalFile.getAbsolutePath()).thenReturn(expectedPath + "/test.png");
-
-        when(fileSystemOperations.getCanonicalFile(any(File.class)))
-                .thenAnswer(invocation -> {
-                    File file = invocation.getArgument(0);
-                    String path = file.getPath();
-                    if (path.contains(expectedPathPart) && !path.contains(".png")) {
-                        return mockCanonicalDirectory;
-                    } else {
-                        return mockCanonicalFile;
-                    }
-                });
-
-        when(fileSystemOperations.exists(mockCanonicalFile)).thenReturn(false);
-
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        when(fileSystemOperations.createOutputStream(mockCanonicalFile)).thenReturn(outputStream);
-
-        String result = imageService.storeImage(mockFile, "test", sourceType);
-
-        assertNotNull(result);
-        assertTrue(result.contains(expectedPathPart));
-    }
-    @Test
-    void testGetImageAsDataUri_NullPath() {
-        String result = imageService.getImageAsDataUri(null);
-        assertNull(result);
+            assertThrows(IllegalStateException.class, () -> imageService.deleteImage("invalid_no_dash.png"));
+        }
     }
 
     @Test
-    void testGetImageAsDataUri_BlankPath() {
-        String result = imageService.getImageAsDataUri("   ");
-        assertNull(result);
-    }
-    @Test
-    void testGetImageAsDataUri_FileDoesNotExist() {
-        String result = imageService.getImageAsDataUri("/does/not/exist.png");
-        assertNull(result);
-    }
+    void testDeleteImage_NullFilename() {
+        try (MockedStatic<Files> mockedFiles = mockStatic(Files.class)) {
+            mockedFiles.when(() -> Files.createDirectories(any(Path.class)))
+                    .thenReturn(null);
 
-    @Test
-    void testGetImageAsDataUri_Success() throws IOException {
-        Path tempDir = Files.createTempDirectory("image-test");
-        Path imageFile = tempDir.resolve("test.png");
-
-        byte[] imageBytes = new byte[] { 1, 2, 3, 4, 5 };
-        Files.write(imageFile, imageBytes);
-
-        String result = imageService.getImageAsDataUri(imageFile.toString());
-
-        assertNotNull(result);
-        assertTrue(result.startsWith("data:image/"));
-        assertTrue(result.contains(";base64,"));
-
-        String base64Part = result.substring(result.indexOf(",") + 1);
-        byte[] decoded = Base64.getDecoder().decode(base64Part);
-
-        assertArrayEquals(imageBytes, decoded);
+            assertThrows(IllegalStateException.class, () -> imageService.deleteImage(null));
+        }
     }
 
     @Test
-    void testGetImageAsDataUri_UnknownContentTypeDefaultsToPng() throws IOException {
-        Path tempDir = Files.createTempDirectory("image-test");
-        Path imageFile = tempDir.resolve("test.unknown");
+    void testDeleteImage_PathTraversalAttempt() {
+        try (MockedStatic<Files> mockedFiles = mockStatic(Files.class)) {
+            mockedFiles.when(() -> Files.createDirectories(any(Path.class)))
+                    .thenReturn(null);
 
-        byte[] imageBytes = new byte[] { 9, 8, 7 };
-        Files.write(imageFile, imageBytes);
-
-        String result = imageService.getImageAsDataUri(imageFile.toString());
-
-        assertNotNull(result);
-        assertTrue(result.startsWith("data:image/png;base64,"));
+            assertThrows(IllegalStateException.class, () -> imageService.deleteImage("../../../etc/passwd"));
+        }
     }
 
     @Test
-    void testGetImageAsDataUri_ReadFailureThrowsException() throws IOException {
-        Path tempDir = Files.createTempDirectory("image-test");
+    void testStoreImage_MultipleUniqueFiles() throws IOException {
+        try (MockedStatic<Files> mockedFiles = mockStatic(Files.class)) {
+            byte[] fileContent1 = "content1".getBytes();
+            byte[] fileContent2 = "content2".getBytes();
 
-        assertThrows(IllegalStateException.class, () ->
-                        imageService.getImageAsDataUri(tempDir.toString()));
+            when(mockFile.isEmpty()).thenReturn(false);
+            when(mockFile.getSize()).thenReturn(1024L);
+            when(mockFile.getOriginalFilename()).thenReturn("test.png");
+            when(mockFile.getContentType()).thenReturn("image/png");
 
+            mockedFiles.when(() -> Files.newOutputStream(any(), any(), any()))
+                    .thenReturn(new java.io.ByteArrayOutputStream());
+
+            when(mockFile.getInputStream()).thenReturn(new ByteArrayInputStream(fileContent1));
+            String filename1 = imageService.storeImage(mockFile, "food");
+
+            when(mockFile.getInputStream()).thenReturn(new ByteArrayInputStream(fileContent2));
+            String filename2 = imageService.storeImage(mockFile, "food");
+
+            assertNotNull(filename1);
+            assertNotNull(filename2);
+            assertNotEquals(filename1, filename2);
+            assertTrue(filename1.startsWith("food-"));
+            assertTrue(filename2.startsWith("food-"));
+        }
     }
 
+    @Test
+    void testStoreImage_CaseInsensitiveSourceType() throws IOException {
+        try (MockedStatic<Files> mockedFiles = mockStatic(Files.class)) {
+            byte[] fileContent = "content".getBytes();
+            when(mockFile.isEmpty()).thenReturn(false);
+            when(mockFile.getSize()).thenReturn(1024L);
+            when(mockFile.getOriginalFilename()).thenReturn("test.png");
+            when(mockFile.getContentType()).thenReturn("image/png");
+            when(mockFile.getInputStream()).thenReturn(new ByteArrayInputStream(fileContent));
+
+            mockedFiles.when(() -> Files.newOutputStream(any(), any(), any()))
+                    .thenReturn(new java.io.ByteArrayOutputStream());
+
+            String result = imageService.storeImage(mockFile, "FOOD");
+
+            assertNotNull(result);
+            assertTrue(result.startsWith("food-"));
+        }
+    }
+
+    @Test
+    void testStoreImage_SourceTypeWithWhitespace() throws IOException {
+        try (MockedStatic<Files> mockedFiles = mockStatic(Files.class)) {
+            byte[] fileContent = "content".getBytes();
+            when(mockFile.isEmpty()).thenReturn(false);
+            when(mockFile.getSize()).thenReturn(1024L);
+            when(mockFile.getOriginalFilename()).thenReturn("test.png");
+            when(mockFile.getContentType()).thenReturn("image/png");
+            when(mockFile.getInputStream()).thenReturn(new ByteArrayInputStream(fileContent));
+
+            mockedFiles.when(() -> Files.newOutputStream(any(), any(), any()))
+                    .thenReturn(new java.io.ByteArrayOutputStream());
+
+            String result = imageService.storeImage(mockFile, "  vitamin  ");
+
+            assertNotNull(result);
+            assertTrue(result.startsWith("vitamin-"));
+        }
+    }
+
+    @Test
+    void testStoreImage_JpgExtension() throws IOException {
+        try (MockedStatic<Files> mockedFiles = mockStatic(Files.class)) {
+            byte[] fileContent = "content".getBytes();
+            when(mockFile.isEmpty()).thenReturn(false);
+            when(mockFile.getSize()).thenReturn(1024L);
+            when(mockFile.getOriginalFilename()).thenReturn("test.jpg");
+            when(mockFile.getContentType()).thenReturn("image/jpeg");
+            when(mockFile.getInputStream()).thenReturn(new ByteArrayInputStream(fileContent));
+
+            mockedFiles.when(() -> Files.newOutputStream(any(), any(), any()))
+                    .thenReturn(new java.io.ByteArrayOutputStream());
+
+            String result = imageService.storeImage(mockFile, "food");
+
+            assertNotNull(result);
+            assertTrue(result.endsWith(".jpg"));
+        }
+    }
+
+    @Test
+    void testStoreImage_JpegExtension() throws IOException {
+        try (MockedStatic<Files> mockedFiles = mockStatic(Files.class)) {
+            byte[] fileContent = "content".getBytes();
+            when(mockFile.isEmpty()).thenReturn(false);
+            when(mockFile.getSize()).thenReturn(1024L);
+            when(mockFile.getOriginalFilename()).thenReturn("test.jpeg");
+            when(mockFile.getContentType()).thenReturn("image/jpeg");
+            when(mockFile.getInputStream()).thenReturn(new ByteArrayInputStream(fileContent));
+
+            mockedFiles.when(() -> Files.newOutputStream(any(), any(), any()))
+                    .thenReturn(new java.io.ByteArrayOutputStream());
+
+            String result = imageService.storeImage(mockFile, "food");
+
+            assertNotNull(result);
+            assertTrue(result.endsWith(".jpeg"));
+        }
+    }
+
+    @Test
+    void testLoadImageAsResource_WrongPrefix() {
+        try (MockedStatic<Files> mockedFiles = mockStatic(Files.class)) {
+            mockedFiles.when(() -> Files.createDirectories(any(Path.class)))
+                    .thenReturn(null);
+
+            assertThrows(IllegalStateException.class, () -> imageService.loadImageAsResource("vitamin-12345.png"));
+        }
+    }
 }

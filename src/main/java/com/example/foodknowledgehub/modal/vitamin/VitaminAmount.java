@@ -13,10 +13,10 @@ public class VitaminAmount {
     private Vitamin vitamin;
 
     @Column(name = "amount_mg")
-    private double amountMilligrams;
+    private Double amountMilligrams;
 
     @Column(name = "daily_value_percent")
-    private double dailyValuePercent;
+    private Double dailyValuePercent;
 
     //<editor-fold desc="Getters and Setters">
 
@@ -28,19 +28,19 @@ public class VitaminAmount {
         this.vitamin = vitamin;
     }
 
-    public double getAmountMilligrams() {
+    public Double getAmountMilligrams() {
         return amountMilligrams;
     }
 
-    public void setAmountMilligrams(double amountMilligrams) {
+    public void setAmountMilligrams(Double amountMilligrams) {
         this.amountMilligrams = amountMilligrams;
     }
 
-    public double getDailyValuePercent() {
+    public Double getDailyValuePercent() {
         return dailyValuePercent;
     }
 
-    public void setDailyValuePercent(double dailyValuePercent) {
+    public void setDailyValuePercent(Double dailyValuePercent) {
         this.dailyValuePercent = dailyValuePercent;
     }
     //</editor-fold>

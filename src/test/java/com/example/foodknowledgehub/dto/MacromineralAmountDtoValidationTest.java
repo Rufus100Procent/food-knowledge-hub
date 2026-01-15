@@ -38,7 +38,7 @@ class MacromineralAmountDtoValidationTest {
     @Test
     void negative_amountMilligrams_fails_validation() {
         MacromineralAmountDto dto = validDto();
-        dto.setAmountMilligrams(-1);
+        dto.setAmountMilligrams(-1.0);
 
         Set<ConstraintViolation<MacromineralAmountDto>> violations =
                 validator.validate(dto);
@@ -49,7 +49,7 @@ class MacromineralAmountDtoValidationTest {
     @Test
     void dailyValuePercent_too_high_fails_validation() {
         MacromineralAmountDto dto = validDto();
-        dto.setDailyValuePercent(2000);
+        dto.setDailyValuePercent(2000.0);
 
         Set<ConstraintViolation<MacromineralAmountDto>> violations =
                 validator.validate(dto);
@@ -60,8 +60,8 @@ class MacromineralAmountDtoValidationTest {
     private MacromineralAmountDto validDto() {
         MacromineralAmountDto dto = new MacromineralAmountDto();
         dto.setMacromineral(Macromineral.POTASSIUM);
-        dto.setAmountMilligrams(350);
-        dto.setDailyValuePercent(10);
+        dto.setAmountMilligrams(350.0);
+        dto.setDailyValuePercent(10.0);
         return dto;
     }
 

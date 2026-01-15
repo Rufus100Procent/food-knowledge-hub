@@ -38,7 +38,7 @@ class VitaminAmountDtoValidationTest {
     @Test
     void negative_amountMilligrams_fails_validation() {
         VitaminAmountDto dto = validDto();
-        dto.setAmountMilligrams(-5);
+        dto.setAmountMilligrams(-5.0);
 
         Set<ConstraintViolation<VitaminAmountDto>> violations =
                 validator.validate(dto);
@@ -49,7 +49,7 @@ class VitaminAmountDtoValidationTest {
     @Test
     void dailyValuePercent_too_high_fails_validation() {
         VitaminAmountDto dto = validDto();
-        dto.setDailyValuePercent(2000);
+        dto.setDailyValuePercent(2000.0);
 
         Set<ConstraintViolation<VitaminAmountDto>> violations =
                 validator.validate(dto);
@@ -60,8 +60,8 @@ class VitaminAmountDtoValidationTest {
     private VitaminAmountDto validDto() {
         VitaminAmountDto dto = new VitaminAmountDto();
         dto.setVitamin(Vitamin.C);
-        dto.setAmountMilligrams(75);
-        dto.setDailyValuePercent(100);
+        dto.setAmountMilligrams(75.0);
+        dto.setDailyValuePercent(100.0);
         return dto;
     }
 

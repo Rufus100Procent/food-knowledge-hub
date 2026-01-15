@@ -37,7 +37,7 @@ class MicromineralAmountDtoValidationTest {
     @Test
     void negative_amountMilligrams_fails_validation() {
         MicromineralAmountDto dto = validDto();
-        dto.setAmountMilligrams(-5);
+        dto.setAmountMilligrams(-5.0);
 
         Set<ConstraintViolation<MicromineralAmountDto>> violations =
                 validator.validate(dto);
@@ -48,8 +48,8 @@ class MicromineralAmountDtoValidationTest {
     private MicromineralAmountDto validDto() {
         MicromineralAmountDto dto = new MicromineralAmountDto();
         dto.setMicromineral(Micromineral.IRON);
-        dto.setAmountMilligrams(18);
-        dto.setDailyValuePercent(100);
+        dto.setAmountMilligrams(18.0);
+        dto.setDailyValuePercent(100.0);
         return dto;
     }
 

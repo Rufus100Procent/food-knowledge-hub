@@ -26,20 +26,20 @@ public final class FoodHelper {
 
         MacromineralAmount potassium = new MacromineralAmount();
         potassium.setMacromineral(Macromineral.POTASSIUM);
-        potassium.setAmountMilligrams(358);
-        potassium.setDailyValuePercent(10);
+        potassium.setAmountMilligrams(358.0);
+        potassium.setDailyValuePercent(10.0);
         banana.getMacrominerals().add(potassium);
 
         MicromineralAmount manganese = new MicromineralAmount();
         manganese.setMicromineral(Micromineral.MANGANESE);
         manganese.setAmountMilligrams(0.27);
-        manganese.setDailyValuePercent(13);
+        manganese.setDailyValuePercent(13.0);
         banana.getMicrominerals().add(manganese);
 
         VitaminAmount b6 = new VitaminAmount();
         b6.setVitamin(Vitamin.B6_PYRIDOXINE);
         b6.setAmountMilligrams(0.4);
-        b6.setDailyValuePercent(20);
+        b6.setDailyValuePercent(20.0);
         banana.getVitamins().add(b6);
 
         return banana;

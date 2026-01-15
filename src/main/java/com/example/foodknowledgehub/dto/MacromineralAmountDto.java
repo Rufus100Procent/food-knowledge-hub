@@ -12,11 +12,11 @@ public class MacromineralAmountDto {
 
     @DecimalMin(value = "0.0", message = "Macromineral amount cannot be negative.")
     @DecimalMax(value = "100000.0", message = "Macromineral amount is unrealistically high.")
-    private double amountMilligrams;
+    private Double amountMilligrams;
 
     @DecimalMin(value = "0.0", message = "Daily value percent cannot be negative.")
     @DecimalMax(value = "1000.0", message = "Daily value percent cannot exceed 1000%.")
-    private double dailyValuePercent;
+    private Double dailyValuePercent;
 
     //<editor-fold desc="Getters and Setters">
 
@@ -28,19 +28,19 @@ public class MacromineralAmountDto {
         this.macromineral = macromineral;
     }
 
-    public double getAmountMilligrams() {
+    public Double getAmountMilligrams() {
         return amountMilligrams;
     }
 
-    public void setAmountMilligrams(double amountMilligrams) {
+    public void setAmountMilligrams(Double amountMilligrams) {
         this.amountMilligrams = amountMilligrams;
     }
 
-    public double getDailyValuePercent() {
+    public Double getDailyValuePercent() {
         return dailyValuePercent;
     }
 
-    public void setDailyValuePercent(double dailyValuePercent) {
+    public void setDailyValuePercent(Double dailyValuePercent) {
         this.dailyValuePercent = dailyValuePercent;
     }
 

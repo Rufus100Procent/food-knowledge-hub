@@ -34,7 +34,7 @@ class FoodRepositoryIT extends AbstractPostgresContainer {
         assertEquals(2, found.getBenefits().size());
         assertEquals("High in potassium", found.getBenefits().getFirst());
 
-        assertEquals(890.0, found.getMacronutrients().getCalories());
+        assertEquals(89.0, found.getMacronutrients().getCalories());
         assertEquals(23.0, found.getMacronutrients().getCarbohydratesGrams());
 
         assertEquals(1, found.getMacrominerals().size());

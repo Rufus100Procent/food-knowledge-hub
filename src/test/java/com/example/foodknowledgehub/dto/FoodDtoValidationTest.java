@@ -100,7 +100,7 @@ class FoodDtoValidationTest {
     @Test
     void negative_calories_fails_validation() {
         FoodDto dto = validFoodDto();
-        dto.getMacronutrients().setCalories(-1);
+        dto.getMacronutrients().setCalories(-1.1);
 
         Set<ConstraintViolation<FoodDto>> violations = validator.validate(dto);
 
@@ -163,12 +163,12 @@ class FoodDtoValidationTest {
         dto.setBenefits(List.of("High in potassium"));
 
         MacronutrientProfileDto macros = new MacronutrientProfileDto();
-        macros.setCalories(890);
+        macros.setCalories(8.90);
         macros.setProteinGrams(1.1);
         macros.setFatGrams(0.3);
-        macros.setCarbohydratesGrams(23);
+        macros.setCarbohydratesGrams(23.2);
         macros.setFiberGrams(2.6);
-        macros.setSugarGrams(12);
+        macros.setSugarGrams(12.1);
 
         dto.setMacronutrients(macros);
 

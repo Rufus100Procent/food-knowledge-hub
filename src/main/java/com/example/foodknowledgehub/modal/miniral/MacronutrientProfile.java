@@ -5,61 +5,62 @@ import jakarta.persistence.Embeddable;
 @Embeddable
 public class MacronutrientProfile {
 
-    private double calories;
-    private double proteinGrams;
-    private double fatGrams;
-    private double carbohydratesGrams;
-    private double fiberGrams;
-    private double sugarGrams;
+    private Double calories;
+    private Double proteinGrams;
+    private Double fatGrams;
+    private Double carbohydratesGrams;
+    private Double fiberGrams;
+    private Double sugarGrams;
 
     //<editor-fold desc="Getters and Setters">
 
-    public double getCalories() {
+    public Double getCalories() {
         return calories;
     }
 
-    public void setCalories(double calories) {
+    public void setCalories(Double calories) {
         this.calories = calories;
     }
 
-    public double getProteinGrams() {
+    public Double getProteinGrams() {
         return proteinGrams;
     }
 
-    public void setProteinGrams(double proteinGrams) {
+    public void setProteinGrams(Double proteinGrams) {
         this.proteinGrams = proteinGrams;
     }
 
-    public double getCarbohydratesGrams() {
-        return carbohydratesGrams;
-    }
-
-    public void setCarbohydratesGrams(double carbohydratesGrams) {
-        this.carbohydratesGrams = carbohydratesGrams;
-    }
-
-    public double getFatGrams() {
+    public Double getFatGrams() {
         return fatGrams;
     }
 
-    public void setFatGrams(double fatGrams) {
+    public void setFatGrams(Double fatGrams) {
         this.fatGrams = fatGrams;
     }
 
-    public double getFiberGrams() {
+    public Double getCarbohydratesGrams() {
+        return carbohydratesGrams;
+    }
+
+    public void setCarbohydratesGrams(Double carbohydratesGrams) {
+        this.carbohydratesGrams = carbohydratesGrams;
+    }
+
+    public Double getFiberGrams() {
         return fiberGrams;
     }
 
-    public void setFiberGrams(double fiberGrams) {
+    public void setFiberGrams(Double fiberGrams) {
         this.fiberGrams = fiberGrams;
     }
 
-    public double getSugarGrams() {
+    public Double getSugarGrams() {
         return sugarGrams;
     }
 
-    public void setSugarGrams(double sugarGrams) {
+    public void setSugarGrams(Double sugarGrams) {
         this.sugarGrams = sugarGrams;
     }
+
     //</editor-fold>
 }

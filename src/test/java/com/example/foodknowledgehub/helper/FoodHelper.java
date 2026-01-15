@@ -16,12 +16,12 @@ public final class FoodHelper {
         banana.getBenefits().add("better sleep");
 
         MacronutrientProfile macros = new MacronutrientProfile();
-        macros.setCalories(890);
+        macros.setCalories(89.0);
         macros.setProteinGrams(1.1);
         macros.setFatGrams(0.3);
-        macros.setCarbohydratesGrams(23);
+        macros.setCarbohydratesGrams(23.0);
         macros.setFiberGrams(2.6);
-        macros.setSugarGrams(12);
+        macros.setSugarGrams(12.0);
         banana.setMacronutrients(macros);
 
         MacromineralAmount potassium = new MacromineralAmount();

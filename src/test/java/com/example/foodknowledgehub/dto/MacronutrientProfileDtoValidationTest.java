@@ -25,7 +25,7 @@ class MacronutrientProfileDtoValidationTest {
     @Test
     void negative_calories_fails_validation() {
         MacronutrientProfileDto dto = validDto();
-        dto.setCalories(-1);
+        dto.setCalories(-1.1);
 
         Set<ConstraintViolation<MacronutrientProfileDto>> violations =
                 validator.validate(dto);
@@ -36,7 +36,7 @@ class MacronutrientProfileDtoValidationTest {
     @Test
     void protein_too_high_fails_validation() {
         MacronutrientProfileDto dto = validDto();
-        dto.setProteinGrams(50000);
+        dto.setProteinGrams(50000.0);
 
         Set<ConstraintViolation<MacronutrientProfileDto>> violations =
                 validator.validate(dto);
@@ -46,12 +46,12 @@ class MacronutrientProfileDtoValidationTest {
 
     private MacronutrientProfileDto validDto() {
         MacronutrientProfileDto dto = new MacronutrientProfileDto();
-        dto.setCalories(500);
-        dto.setProteinGrams(25);
-        dto.setFatGrams(10);
-        dto.setCarbohydratesGrams(60);
-        dto.setFiberGrams(8);
-        dto.setSugarGrams(5);
+        dto.setCalories(50.0);
+        dto.setProteinGrams(25.0);
+        dto.setFatGrams(10.0);
+        dto.setCarbohydratesGrams(60.0);
+        dto.setFiberGrams(8.0);
+        dto.setSugarGrams(5.0);
         return dto;
     }
 

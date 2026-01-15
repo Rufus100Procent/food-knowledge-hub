@@ -8,9 +8,15 @@ Testing in general, Unit, Integration, Repository (JPA) testing, slice tests, en
 * project gives knowladge about diffrent Food and whats inside them , all miniral, vitamins exc..,
 * there are 2 types of user, admin user and normal user
   * Admin User
-    * Can create vitimin, update info, and delete, full CRUD access
+    * bulk insert
+    * Can create, updtate info, and delete, (full CRUD access)
+    * fetch unlimited rows from db
   * normal User
-    * can only read
+    * CRUD
+    * fetch unlimited rows db
+  * non-user
+    * fetch only first 5 rows on db
+    * read only
 
 very simple project with the goal to dive deeper into code Testing
 

@@ -105,7 +105,9 @@ public class FoodService {
         Food food = foodRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Food not found: " + id));
 
-        String filePath = food.getImageUrl();
+        imageService.deleteImage(food.getImageUrl());
+        log.info("Image file deleted at {}", food.getImageUrl());
+
         foodRepository.delete(food);
 
         log.info("Food deleted with id {}", id);

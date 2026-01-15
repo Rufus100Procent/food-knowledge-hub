@@ -7,6 +7,8 @@ import com.example.foodknowledgehub.modal.miniral.MacromineralInfo;
 import com.example.foodknowledgehub.repo.FoodRepository;
 import com.example.foodknowledgehub.repo.MacromineralInfoRepository;
 import com.example.foodknowledgehub.service.mapper.MacromineralInfoMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +18,8 @@ import java.util.List;
 @Service
 @Transactional
 public class MacromineralInfoService {
+
+    private final Logger log = LoggerFactory.getLogger(MacromineralInfoService.class);
 
     private final MacromineralInfoRepository infoRepository;
     private final FoodRepository foodRepository;

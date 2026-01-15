@@ -11,10 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 @Service
@@ -44,7 +40,7 @@ public class FoodService {
         }
 
         if (dto.getImageFile() != null && !dto.getImageFile().isEmpty()) {
-            String imagePath = imageService.storeImage(dto.getImageFile(),"food");
+            String imagePath = imageService.storeImage(dto.getImageFile(), "food");
             dto.setImageUrl(imagePath);
         }
 
@@ -59,14 +55,14 @@ public class FoodService {
         log.info("Updating food with id {}", id);
 
         Food existing = foodRepository.findById(id)
-                .orElseThrow(() ->{
+                .orElseThrow(() -> {
                     log.warn("Food not found with id {}", id);
                     return new IllegalArgumentException("cannot update food that doesnt exist: " + id);
-                } );
+                });
 
         if (dto.getImageFile() != null && !dto.getImageFile().isEmpty()) {
 
-            String imagePath = imageService.storeImage(dto.getImageFile(),"food");
+            String imagePath = imageService.storeImage(dto.getImageFile(), "food");
             dto.setImageUrl(imagePath);
             log.info("New image stored at {}", imagePath);
         }
@@ -109,18 +105,8 @@ public class FoodService {
         log.info("Image file deleted at {}", food.getImageUrl());
 
         foodRepository.delete(food);
-
         log.info("Food deleted with id {}", id);
 
-        if (filePath != null) {
-            Path path = Paths.get(filePath);
-            try {
-                Files.deleteIfExists(path);
-                log.info("Image file deleted at {}", filePath);
-            } catch (IOException e) {
-                log.error("Failed to delete image file {}", filePath, e);
-            }
-        }
     }
 }
 

@@ -21,7 +21,8 @@ public class FoodMapper {
     }
 
     public void updateEntity(FoodDto dto, Food food) {
-        applyDtoToEntity(dto, food);
+        // Only update non-null fields from DTO
+        applyDtoToEntitySelectively(dto, food);
     }
 
     public FoodDto toDto(Food food) {
@@ -103,6 +104,41 @@ public class FoodMapper {
         applyVitamins(dto, food);
     }
 
+    private void applyDtoToEntitySelectively(FoodDto dto, Food food) {
+        if (dto.getName() != null) {
+            food.setName(dto.getName());
+        }
+
+        if (dto.getImageUrl() != null) {
+            food.setImageUrl(dto.getImageUrl());
+        }
+
+        if (dto.getOverview() != null) {
+            food.setOverview(dto.getOverview());
+        }
+
+        if (dto.getBenefits() != null) {
+            food.getBenefits().clear();
+            food.getBenefits().addAll(dto.getBenefits());
+        }
+
+        if (dto.getMacronutrients() != null) {
+            applyMacronutrientsSelectively(dto.getMacronutrients(), food);
+        }
+
+        if (dto.getMacrominerals() != null) {
+            applyMacrominerals(dto, food);
+        }
+
+        if (dto.getMicrominerals() != null) {
+            applyMicrominerals(dto, food);
+        }
+
+        if (dto.getVitamins() != null) {
+            applyVitamins(dto, food);
+        }
+    }
+
     private void applyMacronutrients(FoodDto dto, Food food) {
         MacronutrientProfileDto m = dto.getMacronutrients();
 
@@ -123,6 +159,33 @@ public class FoodMapper {
         macros.setCarbohydratesGrams(m.getCarbohydratesGrams());
         macros.setFiberGrams(m.getFiberGrams());
         macros.setSugarGrams(m.getSugarGrams());
+    }
+
+    private void applyMacronutrientsSelectively(MacronutrientProfileDto m, Food food) {
+        MacronutrientProfile macros = food.getMacronutrients();
+        if (macros == null) {
+            macros = new MacronutrientProfile();
+            food.setMacronutrients(macros);
+        }
+
+        if (m.getCalories() != null) {
+            macros.setCalories(m.getCalories());
+        }
+        if (m.getProteinGrams() != null) {
+            macros.setProteinGrams(m.getProteinGrams());
+        }
+        if (m.getFatGrams() != null) {
+            macros.setFatGrams(m.getFatGrams());
+        }
+        if (m.getCarbohydratesGrams() != null) {
+            macros.setCarbohydratesGrams(m.getCarbohydratesGrams());
+        }
+        if (m.getFiberGrams() != null) {
+            macros.setFiberGrams(m.getFiberGrams());
+        }
+        if (m.getSugarGrams() != null) {
+            macros.setSugarGrams(m.getSugarGrams());
+        }
     }
 
     private void applyMacrominerals(FoodDto dto, Food food) {

@@ -16,11 +16,6 @@ public class MicromineralInfoAdminController {
         this.service = service;
     }
 
-    @PostMapping("/bulk")
-    public List<MicromineralInfoDto> bulkUpsert(@RequestBody List<MicromineralInfoDto> body) {
-        return service.bulkUpsert(body);
-    }
-
     @GetMapping
     public List<MicromineralInfoDto> getAll() {
         return service.getAll();

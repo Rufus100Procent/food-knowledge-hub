@@ -16,10 +16,6 @@ public class VitaminInfoAdminController {
         this.service = service;
     }
 
-    @PostMapping("/bulk")
-    public List<VitaminInfoDto> bulkUpsert(@RequestBody List<VitaminInfoDto> body) {
-        return service.bulkUpsert(body);
-    }
 
     @GetMapping
     public List<VitaminInfoDto> getAll() {

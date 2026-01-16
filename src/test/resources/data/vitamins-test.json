@@ -1,0 +1,64 @@
+[
+  {
+    "vitamin": "A",
+    "overview": "Vitamin A is a fat-soluble vitamin that refers to a group of compounds including retinol, retinal and retinyl esters. It is essential for normal vision, immune function, reproduction, and the growth and differentiation of many tissues, especially epithelial tissues and the developing embryo.",
+    "benefits": [
+      "Supports normal vision, particularly low-light (scotopic) vision through its role in the visual cycle in the retina",
+      "Maintains integrity and function of epithelial tissues in the skin, respiratory tract, gastrointestinal tract and urinary tract",
+      "Plays a key role in immune function, including development and regulation of innate and adaptive immune responses",
+      "Supports normal growth, skeletal development and cellular differentiation during childhood",
+      "Required for normal reproduction and development of the embryo and fetus",
+      "Contributes to normal maintenance and repair of mucous membranes, helping protect against infection"
+    ],
+    "sideEffects": [
+      "Chronic intake of high doses of preformed vitamin A (retinol) can cause toxicity with symptoms such as headache, nausea, dizziness, blurred vision and liver dysfunction",
+      "Very high intakes over time may lead to bone demineralization and increased fracture risk",
+      "Excess preformed vitamin A during pregnancy is associated with teratogenic effects and an increased risk of birth defects",
+      "High-dose supplements can interact with certain medications (for example retinoid drugs) and increase toxicity risk"
+    ],
+    "deficiencySigns": [
+      "Night blindness and impaired ability to see in low light",
+      "Dry, rough skin and dry conjunctiva; Bitot spots on the eye in more advanced deficiency",
+      "Xerophthalmia, corneal drying and in severe cases corneal ulceration and blindness",
+      "Increased susceptibility to infections, especially respiratory and gastrointestinal infections",
+      "Impaired growth in children and potential effects on fertility and reproduction"
+    ]
+  },
+  {
+    "vitamin": "B1_THIAMINE",
+    "overview": "Vitamin B1 (thiamine) is a water-soluble B vitamin that acts as a coenzyme in carbohydrate and branched-chain amino acid metabolism. It is critical for energy production in cells, particularly in tissues with high metabolic demand such as the nervous system and heart.",
+    "benefits": [
+      "Supports normal energy metabolism by helping convert carbohydrates into ATP",
+      "Essential for proper functioning of the nervous system through its role in nerve conduction and neurotransmitter synthesis",
+      "Contributes to normal heart function and helps maintain cardiac energy metabolism",
+      "Supports normal psychological function, including memory and concentration"
+    ],
+    "sideEffects": [
+      "Thiamine from food has no known toxicity because excess amounts are rapidly excreted in urine",
+      "Adverse effects from oral thiamine supplements are rare and usually limited to very high doses or parenteral administration (for example allergic reactions in rare cases)"
+    ],
+    "deficiencySigns": [
+      "Beriberi, which can present as wet beriberi (cardiovascular involvement with edema, tachycardia, heart failure) or dry beriberi (peripheral neuropathy, muscle weakness, loss of reflexes)",
+      "Wernicke–Korsakoff syndrome in severe, prolonged deficiency, particularly in the context of chronic alcohol misuse, characterized by confusion, ataxia, eye movement abnormalities and memory disturbances",
+      "Fatigue, irritability, poor appetite and general weakness in milder deficiency"
+    ]
+  },
+  {
+    "vitamin": "B5_PANTOTHENIC_ACID",
+    "overview": "Vitamin B5 (pantothenic acid) is a water-soluble vitamin that is a component of coenzyme A and acyl carrier protein. It is required for the synthesis and metabolism of fatty acids, cholesterol, steroid hormones and some neurotransmitters.",
+    "benefits": [
+      "Essential for synthesis of coenzyme A, a key cofactor in energy metabolism and fatty acid oxidation",
+      "Supports synthesis of steroid hormones, vitamin D and some neurotransmitters",
+      "Contributes to normal energy-yielding metabolism and reduction of tiredness and fatigue"
+    ],
+    "sideEffects": [
+      "Pantothenic acid is widely distributed in foods and has very low toxicity",
+      "Very high supplemental intakes may cause gastrointestinal disturbance such as mild diarrhea or nausea in some individuals"
+    ],
+    "deficiencySigns": [
+      "Frank deficiency is rare and usually seen only in severe malnutrition or experimental settings",
+      "Reported symptoms include fatigue, irritability, numbness and burning sensations in the hands and feet, headache and gastrointestinal discomfort",
+      "Often occurs together with deficiency of other B vitamins rather than in isolation"
+    ]
+  }
+ ]

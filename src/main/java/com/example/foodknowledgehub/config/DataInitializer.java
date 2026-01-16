@@ -31,8 +31,8 @@ public class DataInitializer implements ApplicationRunner {
 
 //        Thread.sleep(Duration.ofSeconds(5));
 //        macromineralInfoService.createBulkInsertOrMerge();
-//        micromineralInfoService.createBulkInsert();
-        vitaminInfoService.createBulkInsertOrMerge();
+        micromineralInfoService.createBulkInsertOrMerge();
+//        vitaminInfoService.createBulkInsertOrMerge();
 
         System.out.println("hello");
     }

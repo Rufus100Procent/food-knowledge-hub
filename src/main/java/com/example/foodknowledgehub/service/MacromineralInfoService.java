@@ -64,11 +64,7 @@ public class MacromineralInfoService {
         for (MacromineralInfo info : entities) {
             dos.add(mapper.toDto(info, null));
         }
-//
-//        return infoRepository.findAll()
-//                .stream()
-//                .map(e -> mapper.toDto(e, null))
-//                .toList();
+
         return dos;
 
     }
@@ -153,7 +149,8 @@ public class MacromineralInfoService {
         return JsonDataLoader.loadList(
                 objectMapper,
                 "macrominerals.json",
-                new TypeReference<List<MacromineralInfo>>() {}
+                new TypeReference<>() {
+                }
         );
     }
 

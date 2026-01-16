@@ -7,7 +7,6 @@ import com.example.foodknowledgehub.modal.miniral.MacromineralInfo;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Component
@@ -32,19 +31,6 @@ public class MacromineralInfoMapper {
         }
 
         return dto;
-    }
-
-    public void applyDtoToEntity(MacromineralInfoDto dto, MacromineralInfo entity) {
-        entity.setOverview(dto.getOverview());
-        entity.setBenefits((dto.getBenefits()));
-        entity.setSideEffects((dto.getSideEffects()));
-        entity.setDeficiencySigns((dto.getDeficiencySigns()));
-        entity.setVerified(dto.isVerified());
-
-        // store raw path ONLY
-        if (dto.getImageUrl() != null) {
-            entity.setImageUrl(dto.getImageUrl());
-        }
     }
 
     private FoodSummaryDto toFoodSummary(Food food) {

@@ -4,7 +4,6 @@ import com.example.foodknowledgehub.dto.MicromineralInfoDto;
 import com.example.foodknowledgehub.modal.Food;
 import com.example.foodknowledgehub.modal.miniral.Micromineral;
 import com.example.foodknowledgehub.modal.miniral.MicromineralInfo;
-import com.example.foodknowledgehub.modal.vitamin.VitaminInfo;
 import com.example.foodknowledgehub.repo.FoodRepository;
 import com.example.foodknowledgehub.repo.MicromineralInfoRepository;
 import com.example.foodknowledgehub.service.mapper.MicromineralInfoMapper;
@@ -20,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static com.example.foodknowledgehub.utils.EmptyUtils.*;
 import static com.example.foodknowledgehub.utils.EmptyUtils.isEmpty;
 import static com.example.foodknowledgehub.utils.EmptyUtils.isListEmpty;
 import static com.example.foodknowledgehub.utils.EmptyUtils.isListNotEmpty;

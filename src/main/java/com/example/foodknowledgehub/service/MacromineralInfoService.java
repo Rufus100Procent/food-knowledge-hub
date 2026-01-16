@@ -7,6 +7,7 @@ import com.example.foodknowledgehub.modal.miniral.MacromineralInfo;
 import com.example.foodknowledgehub.repo.FoodRepository;
 import com.example.foodknowledgehub.repo.MacromineralInfoRepository;
 import com.example.foodknowledgehub.service.mapper.MacromineralInfoMapper;
+import com.example.foodknowledgehub.utils.JsonDataLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -14,8 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 import tools.jackson.core.type.TypeReference;
 import tools.jackson.databind.ObjectMapper;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -151,17 +150,12 @@ public class MacromineralInfoService {
     }
 
     private List<MacromineralInfo> loadFromJson() {
-        try (InputStream macroMinstrelsJsonFile = getClass().getResourceAsStream("/data/macrominerals.json")) {
-            if (macroMinstrelsJsonFile == null) {
-                throw new IllegalStateException("macrominerals.json not found in classpath");
-            }
-
-            return objectMapper.readValue(macroMinstrelsJsonFile, new TypeReference<>() {
-            });
-
-        } catch (IOException e) {
-            throw new IllegalStateException("Failed to load macrominerals.json", e);
-        }
+        return JsonDataLoader.loadList(
+                objectMapper,
+                "macrominerals.json",
+                new TypeReference<List<MacromineralInfo>>() {}
+        );
     }
+
 
 }

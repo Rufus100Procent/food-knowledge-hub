@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Duration;
+
 @Profile("!test")
 @Transactional
 @Component
@@ -27,7 +29,8 @@ public class DataInitializer implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
-//        macromineralInfoService.createBulkInsert();
+//        Thread.sleep(Duration.ofSeconds(5));
+        macromineralInfoService.createBulkInsertOrMerge();
 //        micromineralInfoService.createBulkInsert();
 //        vitaminInfoService.createBulkInsert();
 

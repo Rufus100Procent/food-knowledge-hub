@@ -2,6 +2,8 @@ package com.example.foodknowledgehub.modal.miniral;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "macromineral_info")
 public class MacromineralInfo {
@@ -18,14 +20,16 @@ public class MacromineralInfo {
     private String overview;
 
     @Column(length = 4000)
-    private String benefits;
+    private List<String> benefits;
 
     @Column(length = 4000)
-    private String sideEffects;
+    private List<String> sideEffects;
 
     @Column(length = 4000)
-    private String deficiencySigns;
+    private List<String> deficiencySigns;
+
     private String imageUrl;
+
     private boolean verified = false;
 
     public Long getId() {
@@ -52,32 +56,28 @@ public class MacromineralInfo {
         this.overview = overview;
     }
 
-    public String getBenefits() {
+    public List<String> getBenefits() {
         return benefits;
     }
 
-    public void setBenefits(String benefits) {
+    public void setBenefits(List<String> benefits) {
         this.benefits = benefits;
     }
 
-    public String getSideEffects() {
+    public List<String> getSideEffects() {
         return sideEffects;
     }
 
-    public boolean isVerified() {
-        return verified;
-    }
-
-    public void setVerified(boolean verified) {
-        this.verified = verified;
-    }
-
-    public void setSideEffects(String sideEffects) {
+    public void setSideEffects(List<String> sideEffects) {
         this.sideEffects = sideEffects;
     }
 
-    public String getDeficiencySigns() {
+    public List<String> getDeficiencySigns() {
         return deficiencySigns;
+    }
+
+    public void setDeficiencySigns(List<String> deficiencySigns) {
+        this.deficiencySigns = deficiencySigns;
     }
 
     public String getImageUrl() {
@@ -88,7 +88,11 @@ public class MacromineralInfo {
         this.imageUrl = imageUrl;
     }
 
-    public void setDeficiencySigns(String deficiencySigns) {
-        this.deficiencySigns = deficiencySigns;
+    public boolean isVerified() {
+        return verified;
+    }
+
+    public void setVerified(boolean verified) {
+        this.verified = verified;
     }
 }

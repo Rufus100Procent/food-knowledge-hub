@@ -22,7 +22,7 @@
       "Muscle cramps, spasms or tingling in the hands and feet can occur, especially when deficiency coexists with low vitamin D or magnesium",
       "In severe hypocalcemia, there may be tetany, seizures and cardiac rhythm disturbances, usually in the context of underlying disorders of vitamin D or parathyroid function"
     ],
-    "imageUrl": "/home/stykle/food-knowledge-hub/src/main/resources/images/macro/CALCIUM.png"
+    "imageUrl": "CALCIUM.png"
   },
   {
     "macromineral": "PHOSPHORUS",
@@ -44,7 +44,7 @@
       "When deficiency occurs, symptoms may include loss of appetite, bone pain, impaired bone mineralization, muscle weakness and increased susceptibility to infection",
       "In severe or prolonged deficiency, there can be osteomalacia, anemia, numbness, confusion and impaired growth in children, often in the context of other illnesses or severe malnutrition"
     ],
-    "imageUrl": "/home/stykle/food-knowledge-hub/src/main/resources/images/macro/PHOSPHORUS.png"
+    "imageUrl": "PHOSPHORUS.png"
   },
   {
     "macromineral": "MAGNESIUM",
@@ -69,7 +69,7 @@
       "Severe hypomagnesemia may lead to seizures, abnormal heart rhythms (including ventricular arrhythmias) and personality changes or confusion",
       "Chronic low magnesium status is associated with low-grade inflammation, hypertension, insulin resistance and reduced bone mineral density in some studies"
     ],
-    "imageUrl": "/home/stykle/food-knowledge-hub/src/main/resources/images/macro/MAGNESIUM.png"
+    "imageUrl": "MAGNESIUM.png"
 
   },
   {
@@ -94,7 +94,7 @@
       "Severe or rapidly developing hyponatremia may lead to seizures, brain swelling, coma and can be life-threatening",
       "Athletes or workers with heavy sweat losses who replace fluid without adequate sodium may develop exercise-associated hyponatremia"
     ],
-    "imageUrl": "/home/stykle/food-knowledge-hub/src/main/resources/images/macro/SODIUM.png"
+    "imageUrl": "SODIUM.png"
 
   },
   {
@@ -120,7 +120,7 @@
       "Cardiac arrhythmias, palpitations and ECG changes can occur, especially in individuals with underlying heart disease or on certain medications",
       "Increased blood pressure and a higher risk of stroke have been associated with chronically low potassium intake combined with high sodium intake"
     ],
-    "imageUrl": "/home/stykle/food-knowledge-hub/src/main/resources/images/macro/POTASSIUM.png"
+    "imageUrl": "POTASSIUM.png"
 
   },
   {
@@ -142,7 +142,7 @@
       "Symptoms can include metabolic alkalosis, muscle weakness, twitching and, in severe cases, respiratory difficulties",
       "In infants fed chloride-deficient formulas (historical issue now corrected), poor growth, lethargy and metabolic alkalosis were reported"
     ],
-    "imageUrl": "/home/stykle/food-knowledge-hub/src/main/resources/images/macro/CHLORIDE.png"
+    "imageUrl": "CHLORIDE.png"
 
   },
   {
@@ -165,7 +165,7 @@
       "Inadequate intake of sulfur-containing amino acids (methionine and cysteine) as part of protein deficiency can contribute to impaired growth, reduced synthesis of body proteins and compromised antioxidant defenses",
       "Possible manifestations in the context of overall protein-energy malnutrition include poor wound healing, thinning hair, fragile nails and decreased immune function, but these are usually due to broader protein and nutrient deficiency rather than sulfur alone"
     ],
-    "imageUrl": "/home/stykle/food-knowledge-hub/src/main/resources/images/macro/SULFUR.png"
+    "imageUrl": "SULFUR.png"
 
   }
 ]

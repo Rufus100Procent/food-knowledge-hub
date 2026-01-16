@@ -2,6 +2,8 @@ package com.example.foodknowledgehub.modal.miniral;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "micromineral_info")
 public class MicromineralInfo {
@@ -18,13 +20,13 @@ public class MicromineralInfo {
     private String overview;
 
     @Column(length = 4000)
-    private String benefits;
+    private List<String> benefits;
 
     @Column(length = 4000)
-    private String sideEffects;
+    private List<String> sideEffects;
 
     @Column(length = 4000)
-    private String deficiencySigns;
+    private List<String> deficiencySigns;
 
     private boolean verified = false;
 
@@ -60,27 +62,27 @@ public class MicromineralInfo {
         this.overview = overview;
     }
 
-    public String getBenefits() {
+    public List<String> getBenefits() {
         return benefits;
     }
 
-    public void setBenefits(String benefits) {
+    public void setBenefits(List<String> benefits) {
         this.benefits = benefits;
     }
 
-    public String getSideEffects() {
+    public List<String> getSideEffects() {
         return sideEffects;
     }
 
-    public void setSideEffects(String sideEffects) {
+    public void setSideEffects(List<String> sideEffects) {
         this.sideEffects = sideEffects;
     }
 
-    public String getDeficiencySigns() {
+    public List<String> getDeficiencySigns() {
         return deficiencySigns;
     }
 
-    public void setDeficiencySigns(String deficiencySigns) {
+    public void setDeficiencySigns(List<String> deficiencySigns) {
         this.deficiencySigns = deficiencySigns;
     }
 }

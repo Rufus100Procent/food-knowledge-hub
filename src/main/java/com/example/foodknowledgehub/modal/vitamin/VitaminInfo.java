@@ -26,6 +26,8 @@ public class VitaminInfo {
     @Column(length = 4000)
     private String deficiencySigns;
 
+    private String imageUrl;
+
     private boolean verified = false;
 
     public Long getId() {
@@ -56,6 +58,14 @@ public class VitaminInfo {
         return benefits;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+    
     public void setBenefits(String benefits) {
         this.benefits = benefits;
     }

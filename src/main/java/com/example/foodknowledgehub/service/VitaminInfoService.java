@@ -48,33 +48,6 @@ public class VitaminInfoService {
         return mapper.toDto(info, foods);
     }
 
-    public List<VitaminInfoDto> bulkUpsert(List<VitaminInfoDto> dtos) {
-        List<VitaminInfoDto> result = new ArrayList<>();
-
-        for (VitaminInfoDto dto : dtos) {
-            if (dto.getVitamin() == null) {
-                continue;
-            }
-
-            Vitamin vitamin = Vitamin.valueOf(dto.getVitamin().toUpperCase());
-
-            VitaminInfo entity = infoRepository.findByVitamin(vitamin)
-                    .orElseGet(() -> {
-                        VitaminInfo created = new VitaminInfo();
-                        created.setVitamin(vitamin);
-                        return created;
-                    });
-
-            mapper.applyDtoToEntity(dto, entity);
-
-            VitaminInfo saved = infoRepository.save(entity);
-
-            result.add(mapper.toDto(saved, null));
-        }
-
-        return result;
-    }
-
     @Transactional(readOnly = true)
     public List<VitaminInfoDto> getAll() {
         List<VitaminInfo> entities = infoRepository.findAll();

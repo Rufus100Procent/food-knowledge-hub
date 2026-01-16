@@ -48,33 +48,6 @@ public class MicromineralInfoService {
         return mapper.toDto(info, foods);
     }
 
-    public List<MicromineralInfoDto> bulkUpsert(List<MicromineralInfoDto> dtos) {
-        List<MicromineralInfoDto> result = new ArrayList<>();
-
-        for (MicromineralInfoDto dto : dtos) {
-            if (dto.getMicromineral() == null) {
-                continue;
-            }
-
-            Micromineral micromineral = Micromineral.valueOf(dto.getMicromineral().toUpperCase());
-
-            MicromineralInfo entity = infoRepository.findByMicromineral(micromineral)
-                    .orElseGet(() -> {
-                        MicromineralInfo created = new MicromineralInfo();
-                        created.setMicromineral(micromineral);
-                        return created;
-                    });
-
-            mapper.applyDtoToEntity(dto, entity);
-
-            MicromineralInfo saved = infoRepository.save(entity);
-
-            result.add(mapper.toDto(saved, null));
-        }
-
-        return result;
-    }
-
     @Transactional(readOnly = true)
     public List<MicromineralInfoDto> getAll() {
         List<MicromineralInfo> entities = infoRepository.findAll();

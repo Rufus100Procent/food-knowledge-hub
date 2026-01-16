@@ -21,4 +21,8 @@ public class MicromineralInfoController {
     public MicromineralInfoDto getMicromineral(@PathVariable String name) {
         return service.getMicromineralDetail(name);
     }
+
+    // get All
+
+    // Update data
 }

@@ -21,4 +21,8 @@ public class MacromineralInfoController {
     public MacromineralInfoDto getMacromineral(@PathVariable String name) {
         return service.getMacromineralDetail(name);
     }
+
+    // get All
+
+    // Update data
 }

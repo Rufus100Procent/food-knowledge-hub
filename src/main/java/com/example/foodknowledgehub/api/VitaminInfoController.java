@@ -21,4 +21,8 @@ public class VitaminInfoController {
     public VitaminInfoDto getVitamin(@PathVariable String name) {
         return service.getVitaminDetail(name);
     }
+
+    // get All
+
+    // Update data
 }

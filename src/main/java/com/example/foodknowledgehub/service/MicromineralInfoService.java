@@ -81,7 +81,7 @@ public class MicromineralInfoService {
 
         for (MicromineralInfo jsonEntry : jsonData) {
             if (jsonEntry.getMicromineral() == null) {
-                log.warn("Skipping JSON entry with null vitamin");
+                log.warn("Skipping JSON entry with null Micro Minerals");
                 continue;
             }
 
@@ -99,11 +99,11 @@ public class MicromineralInfoService {
                 }
             } else {
                 infoRepository.save(jsonEntry);
-                log.info("Inserted new Vitamin: {}", jsonEntry.getMicromineral());
+                log.info("Inserted new Micro Minerals: {}", jsonEntry.getMicromineral());
             }
         }
 
-        log.info("Vitamin merge completed");
+        log.info("Micro Minerals merge completed");
     }
 
 

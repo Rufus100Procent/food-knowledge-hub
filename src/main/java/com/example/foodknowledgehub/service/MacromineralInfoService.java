@@ -56,26 +56,6 @@ public class MacromineralInfoService {
         return mapper.toDto(info, foods);
     }
 
-    public List<MacromineralInfoDto> bulkUpsert(List<MacromineralInfoDto> dtos) {
-        List<MacromineralInfoDto> result = new ArrayList<>();
-
-        for (MacromineralInfoDto dto : dtos) {
-            Macromineral macromineral =
-                    Macromineral.valueOf(dto.getMacromineral().toUpperCase());
-
-            MacromineralInfo entity = infoRepository.findByMacromineral(macromineral)
-                            .orElseGet(() -> {
-                                MacromineralInfo e = new MacromineralInfo();
-                                e.setMacromineral(macromineral);
-                                return e;
-                            });
-
-            mapper.applyDtoToEntity(dto, entity);
-            result.add(mapper.toDto(infoRepository.save(entity), null));
-        }
-
-        return result;
-    }
 
     @Transactional(readOnly = true)
     public List<MacromineralInfoDto> getAll() {

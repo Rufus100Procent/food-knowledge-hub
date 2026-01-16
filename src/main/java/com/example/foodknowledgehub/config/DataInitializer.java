@@ -30,9 +30,9 @@ public class DataInitializer implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
 
 //        Thread.sleep(Duration.ofSeconds(5));
-        macromineralInfoService.createBulkInsertOrMerge();
+//        macromineralInfoService.createBulkInsertOrMerge();
 //        micromineralInfoService.createBulkInsert();
-//        vitaminInfoService.createBulkInsert();
+        vitaminInfoService.createBulkInsertOrMerge();
 
         System.out.println("hello");
     }

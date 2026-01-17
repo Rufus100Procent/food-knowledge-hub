@@ -3,6 +3,7 @@ package com.example.foodknowledgehub.config;
 import com.example.foodknowledgehub.service.MacromineralInfoService;
 import com.example.foodknowledgehub.service.MicromineralInfoService;
 import com.example.foodknowledgehub.service.VitaminInfoService;
+import org.jspecify.annotations.NonNull;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Profile;
@@ -25,7 +26,7 @@ public class DataInitializer implements ApplicationRunner {
     }
 
     @Override
-    public void run(ApplicationArguments args) throws Exception {
+    public void run(@NonNull ApplicationArguments args){
 
         macromineralInfoService.createBulkInsertOrMerge();
         micromineralInfoService.createBulkInsertOrMerge();

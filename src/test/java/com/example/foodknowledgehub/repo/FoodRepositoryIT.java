@@ -9,12 +9,14 @@ import com.example.foodknowledgehub.modal.vitamin.Vitamin;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DataJpaTest
+@ActiveProfiles("test")
 class FoodRepositoryIT extends AbstractPostgresContainer {
 
     @Autowired
